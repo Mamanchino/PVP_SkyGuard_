@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -15,9 +15,10 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    color: #787C82;
     margin: 0;
     padding: 0;
-    background-image: url('/images/background.png');
+    background-image: url('../images/background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -27,7 +28,7 @@ body {
 }
 
 .login-container, .signup-container {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #242B33;
     padding: 2rem;
     border-radius: 10px;
     width: 400px;
@@ -35,13 +36,18 @@ body {
 }
 
 .logo {
-    width: 100px;
+    width: 80%;
     margin-bottom: 1rem;
 }
 
 .form-group {
     margin-bottom: 1rem;
-    text-align: left;
+    position: relative;
+}
+
+h1 {
+    font-size: 24px;
+    color: #B5B8BF;
 }
 
 input {
@@ -52,16 +58,85 @@ input {
     border-radius: 5px;
 }
 
+.form-group input {
+    width: 100%;
+    padding: 14px 45px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+}
+
+.input-icon.left {
+    left: 14px;
+}
+
+.input-icon.right {
+    right: 14px;
+    cursor: pointer;
+}
+
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #305AB8;
     border: none;
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+.auth-links {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.signup-text {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #8c9198;
+}
+
+.signup-text a {
+    color: #3b82f6;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+.auth-divider {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 20px 0;
+}
+
+.forgot-link {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #9aa0a6;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    color: white;
 }
