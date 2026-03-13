@@ -15,7 +15,7 @@
             @csrf
             <div class="form-group">
                 <i class="fa-regular fa-user input-icon left"></i>
-                <input type="text" id="username" name="username" placeholder="Username or Email" required>
+                <input type="text" id="email_or_username" name="email_or_username" placeholder="Username or Email" required>
             </div>
             <div class="form-group">
                 <i class="fa-solid fa-lock input-icon left"></i>
