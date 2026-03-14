@@ -140,3 +140,123 @@ button:hover {
 .forgot-link:hover {
     color: white;
 }
+
+.password-criteria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password-criteria ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.password-criteria li {
+    margin: 5px 0;
+    transition: color 0.3s;
+    width: 100%;
+    text-align: left;
+}
+
+.password-criteria li.blink {
+    animation: blink 0.4s ease-in-out 4;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.15; }
+}
+
+.password-criteria li:first-child {
+    margin-top: 0;
+}
+
+.password-criteria li.invalid {
+    color: #ba3e1f;
+}
+
+.password-criteria li.valid {
+    color: #3daf3d;
+}
+
+.password-criteria li i {
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .password-criteria li {
+        font-size: 14px;
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.modal-icon {
+    font-size: 42px;
+    color: #ba3e1f;
+    margin-bottom: 0.75rem;
+}
+
+.modal-box h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 1rem;
+    color: #222;
+}
+
+.modal-errors {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    text-align: left;
+}
+
+.modal-errors li {
+    font-size: 14px;
+    color: #ba3e1f;
+    padding: 4px 0;
+}
+
+.modal-errors li i {
+    margin-right: 8px;
+}
+
+.modal-close {
+    padding: 9px 32px;
+    border: 0.5px solid #ba3e1f;
+    border-radius: 8px;
+    background: transparent;
+    color: #ba3e1f;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+}
+
+.modal-close:hover {
+    background: #ba3e1f;
+    color: #fff;
+}
