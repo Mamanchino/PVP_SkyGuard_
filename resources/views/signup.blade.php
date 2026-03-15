@@ -28,6 +28,11 @@
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <i class="fa-regular fa-eye input-icon right"></i>
             </div>
+            <div class="form-group">
+                <i class="fa-solid fa-lock input-icon left"></i>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                <i class="fa-regular fa-eye input-icon right"></i>
+            </div>
             <div class="password-criteria">
                 <ul class="password-criteria">
                     <li id="length" class="invalid"><i class="fa fa-times"></i> At least 8 characters</li>
@@ -36,11 +41,6 @@
                     <li id="digit" class="invalid"><i class="fa fa-times"></i> One digit</li>
                     <li id="special" class="invalid"><i class="fa fa-times"></i> One special character</li>
                 </ul>
-            </div>
-            <div class="form-group">
-                <i class="fa-solid fa-lock input-icon left"></i>
-                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
-                <i class="fa-regular fa-eye input-icon right"></i>
             </div>
             <button type="submit">SIGN UP</button>
         </form>
