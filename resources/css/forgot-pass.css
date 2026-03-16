@@ -13,3 +13,77 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #242B33;
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+}
+
+.logo {
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #B5B8BF;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+}
+
+.input-icon.left {
+    left: 14px;
+}
+
+.input-icon.right {
+    right: 14px;
+    cursor: pointer;
+}
+
+form {
+    width: 90%;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 45px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #305AB8;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\ForgotPassController;
+use App\Http\Controllers\ResetPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,9 @@ Route::get('/signup', [SignUpController::class, 'showForm'])->name('signup');
 Route::post('/signup', [SignUpController::class, 'signUp']);
 
 # Forgot password form
-Route::get('/forgot-password', [ForgotPassController::class, 'showForgotPasswordForm'])->name('forgot-password');
+Route::get('/forgot-password', [ForgotPassController::class, 'showForgotPasswordForm'])->name('forgot-password.form');
+Route::post('/forgot-password', [ForgotPassController::class, 'sendResetLink'])->name('forgot-password');
+
+# Reset password form
+Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password.form');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
