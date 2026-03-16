@@ -20,10 +20,12 @@
             <div class="form-group">
                 <i class="fa-solid fa-lock input-icon left"></i>
                 <input type="password" name="password" id="password" placeholder="New Password" required>
+                <i class="fa-regular fa-eye input-icon right"></i>
             </div>
             <div class="form-group">
                 <i class="fa-solid fa-lock input-icon left"></i>
                 <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
+                <i class="fa-regular fa-eye input-icon right"></i>
             </div>
             <div class="password-criteria">
                 <ul class="password-criteria">
