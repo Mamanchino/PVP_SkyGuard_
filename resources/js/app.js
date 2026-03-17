@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const signupForm = document.querySelector('form');
+    const signupForm = document.querySelector('form#signup-form');
     if (signupForm) {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();

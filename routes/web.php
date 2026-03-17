@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\ForgotPassController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,3 +30,8 @@ Route::post('/forgot-password', [ForgotPassController::class, 'sendResetLink'])-
 # Reset password form
 Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password.form');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
+
+# Profile page
+Route::get('/profile', function () {
+    return view('profile', ['user' => auth()->user()]);
+})->middleware('auth')->name('profile');

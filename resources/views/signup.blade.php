@@ -12,7 +12,7 @@
     <div class="signup-container">
         <img src="{{ asset('images/logo.png') }}" alt="SkyGuard Logo" class="logo">
         <h1>Create Your Account</h1>
-        <form action="{{ route('signup') }}" method="POST">
+        <form id="signup-form" action="{{ route('signup') }}" method="POST">
             @csrf
             <div class="form-group">
                 <i class="fa-regular fa-user input-icon left"></i>

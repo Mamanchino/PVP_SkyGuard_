@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'email_or_username' => 'required',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
 
         // Check if user exists
@@ -35,9 +35,11 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/login');
     }
 }
