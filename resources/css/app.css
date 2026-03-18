@@ -9,7 +9,46 @@ body {
     background-size: cover;
     background-position: center;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+}
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow: hidden;
+}
+header{
+    background-color: #242B33;
+    color: #fff;
+    padding: 10px 0;
+}
+#logo{
+    float: left;
+    
+}
+.nav-links{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+.nav-links li{
+    display: inline-block;
+    margin-left: 20px;
+}
+.nav-links li a{
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+.nav-links li a:hover{
+    background-color: #0a669f;
+}
+.content {
+    padding: 50px 0;
+    text-align: center;
 }

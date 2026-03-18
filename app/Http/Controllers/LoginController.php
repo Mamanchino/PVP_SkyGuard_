@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if ($user && Auth::attempt(['email' => $user->email, 'password' => $request->password]) || 
             ($user && Auth::attempt(['name' => $user->name, 'password' => $request->password]))) {
-            return redirect()->intended('/'); // No dashboard yet so just redirect to home
+            return redirect()->intended('/dashboard'); // No dashboard yet so just redirect to home
         }
 
         return back()->withErrors([

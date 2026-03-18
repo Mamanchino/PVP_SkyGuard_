@@ -35,3 +35,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword']
 Route::get('/profile', function () {
     return view('profile', ['user' => auth()->user()]);
 })->middleware('auth')->name('profile');
+
+#Home page
+Route::get('/dashboard', function (){
+    return view('dashboard');
+})->middleware('auth');
