@@ -1,4 +1,5 @@
 import './bootstrap';
+import './dropdown_menu.js';
 
 // ── Signup page ──
 document.addEventListener('DOMContentLoaded', () => {
