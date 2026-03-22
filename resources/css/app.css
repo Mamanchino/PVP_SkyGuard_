@@ -219,17 +219,6 @@ hr{
 .logout{
     cursor:pointer;
 }
-.camera{
-    margin-top: 20vh;
-    margin-left: auto;
-    margin-right: auto;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 800px;
-    height: 500px;
-    border: 1px solid grey;
-}
 .line-spacing{
     border-top-style: solid;
     border-top-width: 1px;
@@ -243,20 +232,20 @@ hr{
     font-family: 'Geist', system-ui, sans-serif;
 }
 .phrase-1{
-     font-size: 48px;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 .phrase-2{
     font-size: 90px;
-  font-weight: 400;
-  letter-spacing: 0.15em;
-  line-height: 1;
-
-  /* tech glow */
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    
+    /* tech glow */
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 .paragprah-1{
     margin-top: 30px;
@@ -309,27 +298,50 @@ hr{
         #0d0f10 10px,       
         #1a1d1f 10px,       
         #1a1d1f 20px        
-    );
-    width: 1200px;
-    height: 100%;
-    padding: 20px 0;
-    z-index: -1;
-    transform: translateX(-50%) scaleX(1.5);
-    position: absolute;
-
-}
-.description-content{
-    position: relative;
-    z-index: 1;
-}
-.video-1{
-    margin:0vh 0vh 0vh 0vh;
-    border: 1px solid grey;
-    width: 500px;
-    height: 320px;
-    text-align: center;
-    align-content: center;
-    justify-items: center;
+        );
+        width: 1200px;
+        height: 100%;
+        padding: 20px 0;
+        z-index: -1;
+        transform: translateX(-50%) scaleX(1.5);
+        position: absolute;
+        
+    }
+    .description-content{
+        position: relative;
+        z-index: 1;
+    }
+    .video-1{
+        margin:0vh 0vh 0vh 0vh;
+        border: 1px solid grey;
+        width: 500px;
+        height: 320px;
+        text-align: center;
+        align-content: center;
+        justify-items: center;
+        
+    }
+    .view-interface{
+        display:flex;
+        justify-items: center;
+        margin-top: 20vh;
+        gap: 5vh;
+    }
+    .notification-pane{
+        height: 100%;
+        width: 25%;
+        border: 1px solid white;
+        margin-left: 10vh;
+    }
+    .camera{
+        
+        margin-right: auto;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        width: 800px;
+        height: 500px;
+        border: 1px solid grey;
+    }
     
-}
-
+    

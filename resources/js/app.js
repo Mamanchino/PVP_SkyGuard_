@@ -1,6 +1,7 @@
 import './bootstrap';
 import './dropdown_menu.js';
 import './blink.js';
+import '../css/footer.css'
 
 // ── Signup page ──
 document.addEventListener('DOMContentLoaded', () => {

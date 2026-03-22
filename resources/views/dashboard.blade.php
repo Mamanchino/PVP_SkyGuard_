@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'SkyGuard') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -66,19 +66,18 @@
             @endif
         </header>
         <hr class="line-spacing"></hr>
-        <div>
-            <div class="notiffication-window">
-                
+        <div class="view-interface">
+            <div class="notification-pane">
+               Place for notifiactions
             </div>
             <div class="camera">
                 <p>Place for camera</p>
             </div>
         </div>
-
+        <x-footer />
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
-
         <script>
         document.addEventListener('click', function(e) {
             console.log('Clicked element:', e.target);
