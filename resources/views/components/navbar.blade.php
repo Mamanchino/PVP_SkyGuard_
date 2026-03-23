@@ -41,24 +41,23 @@
                         </div>
                     @endauth
                     @guest
-                        
-                            <ul class="nav-links">
-                                <li>
-                                    <div class="link">
-                                        <a href="{{ route('login') }}" class=""><span>
-                                                Log in
-                                            </span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="link">
-                                        <a href="{{ route('signup') }}" class="">
-                                            Register
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
+
+                        <ul class="nav-links">
+                            <li>
+                                <form method="GET" action="{{ route('login') }}" class="link">
+                                    @csrf
+                                    <button type="submit" class="">Log in</button>
+                                </form>
+                            </li>
+                            <li>
+
+                                <form method="GET" action="{{ route('signup') }}" class="link">
+                                    @csrf
+                                    <button type="submit" class="">Sign up</button>
+                                </form>
+
+                            </li>
+                        </ul>
                     @endguest
                 </div>
             @endif
