@@ -20,34 +20,7 @@
         @endif
     </head>
     <body>
-        <header class="navbar">
-            @if (Route::has('login'))
-                <div class="navbar-container">
-                    @guest
-                        <div>
-                            <img src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
-                        </div>
-                            <ul class="nav-links">
-                                <li>
-                                    <div class="link">
-                                        <a href="{{ route('login') }}" class=""><span>
-                                                Log in
-                                            </span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="link">
-                                        <a href="{{ route('signup') }}" class="">
-                                            Register
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                    @endguest
-                    </div>
-            @endif
-        </header>
+        <x-navbar />
         <hr class="line-spacing"></hr>
         <div class="opening_card">
         
