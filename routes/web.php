@@ -6,13 +6,11 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\ForgotPassController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChangePasswordController;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
-Route::get('login', [Controller::class, 'showLoginForm'])->name('login');
-Route::get('signup', [Controller::class, 'showSignUpForm'])->name('signup');
 
 # Login form
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -31,6 +29,10 @@ Route::post('/forgot-password', [ForgotPassController::class, 'sendResetLink'])-
 Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('reset-password.form');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 
+# Change password form
+Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->middleware('auth')->name('change-password.form');
+Route::post('/change-password', [ChangePasswordController::class, 'changePassword'])->name('change-password');
+
 # Profile page
 Route::get('/profile', function () {
     return view('profile', ['user' => auth()->user()]);
@@ -39,4 +41,4 @@ Route::get('/profile', function () {
 #Home page
 Route::get('/dashboard', function (){
     return view('dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');

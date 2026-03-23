@@ -10,7 +10,9 @@
 </head>
 <body>
     <div class="container">
-        <img src="{{ asset('images/logo.png') }}" alt="SkyGuard Logo" class="logo">
+        <a href="{{ route('dashboard') }}" class="logo-link">
+            <img src="{{ asset('images/logo.png') }}" alt="SkyGuard Logo" class="logo">
+        </a>
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -21,7 +23,9 @@
                 <i class="fa-regular fa-envelope input-icon left"></i>
                 <input type="text" id="email" name="email" value="{{ $user->email }}" readonly>
             </div>
-            <button type="submit">CHANGE PASSWORD</button>
+            <a href="{{ route('change-password.form') }}">
+                <button type="button">Change Password</button>
+            </a>
         </form>
     </div>
 </body>
