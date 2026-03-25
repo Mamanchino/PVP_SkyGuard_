@@ -10,6 +10,8 @@ body {
     background-size: cover;
     background-position: center;
     height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     /* display: flex; */
     /* justify-content: center;
     align-items: center; */
@@ -287,12 +289,12 @@ hr{
 }
 
 .description{
-    justify-content: center;
-    max-width: 80vh;
+    justify-content: flex-end;
+    width: 100%;
     line-height: 1.7;
     font-family: "Geist Mono", "Geist Mono Fallback";
     border-radius: 30px;
-    display: inline-block;
+    display: flex;
     position: relative;
 }
 .description-background{
@@ -303,7 +305,8 @@ hr{
         #1a1d1f 10px,       
         #1a1d1f 20px        
         );
-        width: 1200px;
+        width: 150%;
+        overflow-x: hidden;
         height: 100%;
         padding: 20px 0;
         z-index: -1;
@@ -314,6 +317,9 @@ hr{
     .description-content{
         position: relative;
         z-index: 1;
+        text-align: right;
+        padding: 40px 60px 40px 0;
+        max-width: 600px;
     }
     .video-1{
         margin:0vh 0vh 0vh 0vh;

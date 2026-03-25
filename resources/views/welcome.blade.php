@@ -45,14 +45,15 @@
                         PLACE for video
                     </div>
                 </div>
-                <div class="description">
-                    <div class="description-background"> </div>
-                    <div class="desctiption-content">
-                        <p>Monitor your property in real-time with a fully autonomous drone — no cameras, no blind spots, no limits.</p>
-                        <br>
-                        <p class="descpiton-2">SkyGuard patrols, detects threats, and alerts you instantly.</p>
-                    </div>
-                </div>
+                
+            </div>
+        </div>
+        <div class="description">
+            <div class="description-background"> </div>
+            <div class="desctiption-content">
+                <p>Monitor your property in real-time with a fully autonomous drone — no cameras, no blind spots, no limits.</p>
+                <br>
+                <p class="descpiton-2">SkyGuard patrols, detects threats, and alerts you instantly.</p>
             </div>
         </div>
         <hr>
