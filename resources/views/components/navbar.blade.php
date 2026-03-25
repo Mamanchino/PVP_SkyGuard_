@@ -1,4 +1,6 @@
+
 <header class="navbar">
+    
             @if (Route::has('login'))
                 <div class="navbar-container">
                     <img src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">

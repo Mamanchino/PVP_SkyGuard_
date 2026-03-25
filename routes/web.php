@@ -39,6 +39,6 @@ Route::get('/profile', function () {
 })->middleware('auth')->name('profile');
 
 #Home page
-Route::get('/dashboard', function (){
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+Route::get('/add-drone', function (){
+    return view('add-drone');
+})->middleware('auth')->name('add-drone');

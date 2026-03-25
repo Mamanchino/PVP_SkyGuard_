@@ -45,7 +45,6 @@
                         PLACE for video
                     </div>
                 </div>
-                
             </div>
         </div>
         <div class="description">
@@ -87,11 +86,6 @@
             </div>
         </div>
         <hr>
-       
-
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
 
         <script>
         document.addEventListener('click', function(e) {

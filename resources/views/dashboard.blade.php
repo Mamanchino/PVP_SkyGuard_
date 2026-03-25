@@ -31,9 +31,7 @@
             </div>
         </div>
         <x-footer />
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        
         <script>
         document.addEventListener('click', function(e) {
             console.log('Clicked element:', e.target);
