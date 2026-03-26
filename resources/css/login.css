@@ -122,3 +122,83 @@ button:hover {
 .forgot-link:hover {
     color: white;
 }
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .login-container {
+        width: 480px;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .logo {
+        width: 70%;
+    }
+
+    .form-group input {
+        font-size: 16px;
+        padding: 16px 45px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .auth-links {
+        width: 80%;
+    }
+
+    .redirect-text {
+        font-size: 18px;
+    }
+
+    .forgot-link {
+        font-size: 18px;
+    }
+}
+
+/* Bigger tablets I guess (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+    .login-container {
+        width: 520px;
+        padding: 3rem 2rem;
+    }
+
+    .logo {
+        width: 75%;
+    }
+
+    .form-group input {
+        font-size: 20px;
+        padding: 18px 45px;
+    }
+
+    button {
+        padding: 16px;
+        font-size: 20px;
+    }
+
+    .redirect-text {
+        font-size: 20px;
+    }
+
+    .auth-links {
+        width: 80%;
+    }
+}
+
+/* Small phones (max 400px) */
+@media (max-width: 400px) {
+    .login-container {
+        width: 88%;
+        padding: 1.5rem 0.75rem;
+    }
+}
+
+/* Medium phones (401px - 767px) */
+@media (min-width: 401px) and (max-width: 767px) {
+    .login-container {
+        width: 85%;
+        max-width: 400px;
+    }
+}

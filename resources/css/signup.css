@@ -227,8 +227,102 @@ button:hover {
     color: #fff;
 }
 
-@media (max-width: 600px) {
+/* Small phones (max 400px) */
+@media (max-width: 400px) {
+    .signup-container {
+        width: 88%;
+        padding: 1.5rem 0.75rem;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        padding: 11px 45px;
+        font-size: 13px;
+    }
+
     .password-criteria li {
-        font-size: 14px;
+        font-size: 12px;
+        margin: 3px 0;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* Medium phones (401px - 767px) */
+@media (min-width: 401px) and (max-width: 767px) {
+    .signup-container {
+        width: 85%;
+        max-width: 400px;
+    }
+
+    .password-criteria li {
+        font-size: 13px;
+        margin: 3px 0;
+    }
+}
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .signup-container {
+        width: 500px;
+        padding: 2.5rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .form-group input {
+        font-size: 16px;
+        padding: 16px 45px;
+    }
+
+    .password-criteria li {
+        font-size: 15px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .redirect-text {
+        font-size: 16px;
+    }
+}
+
+/* Bigger tablets (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+    .signup-container {
+        width: 540px;
+        padding: 3rem 2rem;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .form-group input {
+        font-size: 20px;
+        padding: 18px 45px;
+    }
+
+    .password-criteria li {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 16px;
+        font-size: 20px;
+    }
+
+    .redirect-text {
+        font-size: 18px;
     }
 }

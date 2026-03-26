@@ -87,3 +87,77 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+/* Small phones (max 400px) */
+@media (max-width: 400px) {
+    .container {
+        width: 88%;
+        padding: 1.5rem 0.75rem;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .form-group input {
+        padding: 11px 45px;
+        font-size: 13px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* Medium phones (401px - 767px) */
+@media (min-width: 401px) and (max-width: 767px) {
+    .container {
+        width: 85%;
+        max-width: 400px;
+    }
+}
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        width: 480px;
+        padding: 2.5rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .form-group input {
+        font-size: 16px;
+        padding: 16px 45px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* Bigger tablets (1024px - 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+    .container {
+        width: 520px;
+        padding: 3rem 2rem;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .form-group input {
+        font-size: 20px;
+        padding: 18px 45px;
+    }
+
+    button {
+        padding: 20px;
+        font-size: 17px;
+    }
+}

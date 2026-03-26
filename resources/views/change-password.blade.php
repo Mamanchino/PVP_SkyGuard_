@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="{{ route('dashboard') }}" class="logo-link">
+        <a href="{{ route('add-drone') }}" class="logo-link">
             <img src="{{ asset('images/logo.png') }}" alt="SkyGuard Logo" class="logo">
         </a>
         <h1>Change Password</h1>

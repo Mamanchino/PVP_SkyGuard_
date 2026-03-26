@@ -42,3 +42,8 @@ Route::get('/profile', function () {
 Route::get('/add-drone', function (){
     return view('add-drone');
 })->middleware('auth')->name('add-drone');
+
+# Dashboard page
+Route::get('/dashboard', function (){
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
