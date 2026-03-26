@@ -7,6 +7,8 @@ use App\Http\Controllers\ForgotPassController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\DroneController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,12 +40,7 @@ Route::get('/profile', function () {
     return view('profile', ['user' => auth()->user()]);
 })->middleware('auth')->name('profile');
 
-#Home page
-Route::get('/add-drone', function (){
-    return view('add-drone');
-})->middleware('auth')->name('add-drone');
+#Add a drone to the user's account
+Route::post('/drones/add', [DroneController::class, 'add']);
+Route::get('/add-drone', [DroneController::class, 'get_devices'])->middleware('auth')->name('add-drone');
 
-# Dashboard page
-Route::get('/dashboard', function (){
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');

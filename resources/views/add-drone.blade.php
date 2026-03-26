@@ -25,7 +25,24 @@
     <hr class="line-spacing">
     </hr>
     <div class="device-container">
-
+        
+        <div class="devices">
+            @foreach ($assignedDevices as $device)
+                <div class="device">
+                    <div class="device-status-container">
+                        <div class="device-battery-l">
+                            <div>img {{ $device->battery_level }}% {{ $device->status }}</div>
+                        </div>
+                    </div>
+                    <div class="serial_number">
+                        <h3>{{ $device->serial_number }}</h3>
+                    </div>
+                    <div class="device-image">
+                        Image of Drone
+                    </div>
+                </div>
+            @endforeach
+        </div>
         <div class="add-container">
             <div class="add-button">
                 @csrf
@@ -43,6 +60,8 @@
                         <span class="close">&times;</span>
                         <form id="addDroneForm" method="POST" action="/drones/add">
                             @csrf
+                            <label for="activation_code">Activation Code:</label>
+                            <input type="text" id="activation_code" name="activation_code" placeholder="Enter activation code" required>
                             <label for="serial">Drone Serial Number:</label>
                             <input type="text" id="serial" name="serial" placeholder="Enter serial number" required>
                             <button type="submit">Add Drone</button>

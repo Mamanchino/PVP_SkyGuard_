@@ -6,7 +6,6 @@ footer{
     background-color: #24262b;
     padding: 70px 0;
     bottom: 0;
-    position: fixed;
     left: 0;           /* būtina */
     width: 100%;       /* užpildo visą ekrano plotį */
     z-index: 100; 

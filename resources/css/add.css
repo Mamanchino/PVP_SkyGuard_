@@ -18,15 +18,45 @@ body {
     margin: 15vh 0vw 5vh 0vw;
     border: 1px solid grey;
     padding: 2vh 2vw;
+    display: flex;
+    justify-content: baseline;
+    gap: 5vw;
 }
+.device{
+    border: 1px solid white;
+    width: 25vh;
+    height: 25vh;
+}
+.serial_number{
+    text-align: center;
+    padding-top: 3%;
+    height: 15%
+}
+.device-image{
+    height:70%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.device-status-container{
+    height:15%;
+    padding-left: 0.5vw;
+    padding-top: 1vh;
+}
+.device-status{
+    height: 50%;
+}
+/* #region ADD BUTTON */
 .add-container{
     width:auto;
-    margin: 0vh 0vw 0vh 15vw
+    margin: 0vh 0vw 0vh 0vw
 }
 .add-button{
     border: 1px solid white;
-    width: 20vh;
-    height: 20vh;
+    width: 25vh;
+    height: 25vh;
     display: block;
 }
 .plus-img{
@@ -48,6 +78,9 @@ body {
     border-top-width: 1px;
     border-color: #3d3a39;
 }
+/*#endregion*/
+
+/*#region MODAL CSS*/
 .modal {
     display: none;
     position: fixed;
@@ -59,7 +92,6 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.6);
 }
-
 .modal-content{
     background-color: #1a1c1f;
     margin: 15% auto;
@@ -102,3 +134,4 @@ body {
 .modal button:hover{
     background-color: #45a049;
 }
+/* #endregion */
