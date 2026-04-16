@@ -266,27 +266,6 @@ hr{
         justify-items: center;
         
     }
-    .view-interface{
-        display:flex;
-        justify-items: center;
-        margin-top: 20vh;
-        gap: 5vh;
-    }
-    .notification-pane{
-        height: 100%;
-        width: 25%;
-        border: 1px solid white;
-        margin-left: 10vh;
-    }
-    .camera{
-        
-        margin-right: auto;
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        width: 800px;
-        height: 500px;
-        border: 1px solid grey;
-    }
+    
     
     

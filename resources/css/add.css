@@ -14,6 +14,12 @@ body {
     /* justify-content: center;
     align-items: center; */
 }
+.devices{
+    display: flex;
+
+    justify-content: baseline;
+    gap: 5vw;
+}
 .device-container{
     margin: 15vh 0vw 5vh 0vw;
     border: 1px solid grey;
@@ -23,6 +29,7 @@ body {
     gap: 5vw;
 }
 .device{
+    cursor: pointer;
     border: 1px solid white;
     width: 25vh;
     height: 25vh;
@@ -44,10 +51,46 @@ body {
     height:15%;
     padding-left: 0.5vw;
     padding-top: 1vh;
+    display: flex;
+    justify-content: baseline;
+    gap: 15px;
 }
-.device-status{
-    height: 50%;
+.battery {
+    width: 40px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 3px;
+    position: relative;
+    overflow: visible;
+    scale: 0.8
 }
+
+.battery::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 4px;
+    width: 4px;
+    height: 10px;
+    background: white;
+}
+.battery-fill {
+    height: 100%;
+    background-color: #4caf50; /* green by default */
+    transition: width 0.3s ease;
+}
+.status{
+    display: flex;
+    gap: 10px;
+    position: baseline;
+}
+.work-status{
+    
+}
+
+/* optional: color changes based on battery level with CSS variables */
+.battery-fill[data-level="low"] { background-color: #f44336; } /* red */
+.battery-fill[data-level="medium"] { background-color: #ff9800; } /* orange */
 /* #region ADD BUTTON */
 .add-container{
     width:auto;
@@ -58,6 +101,7 @@ body {
     width: 25vh;
     height: 25vh;
     display: block;
+    cursor: pointer;
 }
 .plus-img{
     width: 5vw;

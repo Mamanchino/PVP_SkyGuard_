@@ -44,3 +44,7 @@ Route::get('/profile', function () {
 Route::post('/drones/add', [DroneController::class, 'add']);
 Route::get('/add-drone', [DroneController::class, 'get_devices'])->middleware('auth')->name('add-drone');
 
+Route::get('/dashboard/{drone}', [DroneController::class, 'showDashboard'])
+    ->middleware('auth')
+    ->name('drone.dashboard');
+

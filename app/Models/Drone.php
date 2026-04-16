@@ -12,6 +12,8 @@ class Drone extends Model
         'status',
         'battery_level',
         'is_registered',
-        'user_id'
+        'user_id',
+        'model',
+        'sim_vehicle_name'
     ];
 }

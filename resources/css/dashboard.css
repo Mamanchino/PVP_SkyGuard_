@@ -1,0 +1,85 @@
+.view-container {
+    display: flex;
+    justify-items: center;
+    margin-top: 20vh;
+    gap: 5vh;
+    margin: 10vh 0px 10vh 0vh;
+}
+
+.notification-pane {
+    height: 100%;
+    width: 25%;
+    border: 1px solid white;
+    margin-left: 10vh;
+}
+.view-interface{
+    display: flex;
+    flex-direction: column;
+    
+}
+.status-interface{
+    
+    display: flex;
+    position: relative;
+    align-items: top;
+    gap: 25px;
+    height:60px;
+    width: 800px;
+}
+.battery-info {
+    display: flex;
+    justify-content: baseline;
+    gap: 15px;
+    flex:1;
+    justify-self: start;
+}
+.battery {
+    width: 60px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 3px;
+    position: relative;
+    overflow: visible;
+}
+
+.battery::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 4px;
+    width: 6px;
+    height: 18px;
+    background: white;
+}
+.battery-fill {
+    height: 100%;
+    background-color: #4caf50; /* green by default */
+    transition: width 0.3s ease;
+}
+.battery-percentage{
+    color: white;
+    padding-top: 5px;
+}
+.drone-status{
+    
+    padding-top: 5px;
+    justify-self: start;
+}
+.drone-name{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 5px;
+    justify-self: center;
+    font-size: 20px;
+}
+.camera {
+
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: 500px;
+    border: 1px solid grey;
+}

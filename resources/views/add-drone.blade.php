@@ -25,22 +25,34 @@
     <hr class="line-spacing">
     </hr>
     <div class="device-container">
-        
+
         <div class="devices">
             @foreach ($assignedDevices as $device)
+            <a href="{{ route('drone.dashboard', $device->id) }}">
                 <div class="device">
                     <div class="device-status-container">
-                        <div class="device-battery-l">
-                            <div>img {{ $device->battery_level }}% {{ $device->status }}</div>
+                        <div class="battery">
+                            <div class="battery-fill"
+                                style="width: {{ $device->battery_level }}%; background-color: {{ $device->battery_level < 30 ? '#f44336' : ($device->battery_level < 60 ? '#ff9800' : '#4caf50') }}">
+                            </div>
+                        </div>
+                        <div class="status">
+                            <div>
+                                {{ $device->battery_level }}% 
+                            </div>
+                            <div class="work-status" style="color: {{ $device->status === 'online' ? '#4caf50' : '#f44336' }}">
+                                {{ $device->status}}
+                            </div>
                         </div>
                     </div>
                     <div class="serial_number">
-                        <h3>{{ $device->serial_number }}</h3>
+                        <h3>{{ $device->name }}</h3>
                     </div>
                     <div class="device-image">
-                        Image of Drone
+                        <img src="{{ asset($model_img[$device->model] ?? 'images/default_drone.png') }}" alt="Drone Image">
                     </div>
                 </div>
+            </a>
             @endforeach
         </div>
         <div class="add-container">
@@ -61,9 +73,9 @@
                         <form id="addDroneForm" method="POST" action="/drones/add">
                             @csrf
                             <label for="activation_code">Activation Code:</label>
-                            <input type="text" id="activation_code" name="activation_code" placeholder="Enter activation code" required>
-                            <label for="serial">Drone Serial Number:</label>
-                            <input type="text" id="serial" name="serial" placeholder="Enter serial number" required>
+                            <input type="text" id="activation_code" name="activation_code"
+                                placeholder="Enter activation code" required>
+                            
                             <button type="submit">Add Drone</button>
                         </form>
                     </div>
@@ -74,7 +86,7 @@
 
     <hr class="line-spacing">
     </hr>
-    <x-footer />
+    
 
     <script>
         document.addEventListener('click', function (e) {
