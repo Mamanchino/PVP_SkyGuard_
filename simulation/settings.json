@@ -1,0 +1,84 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "ClockType": "SteppableClock",
+  "ViewMode": "SpringArmChase",
+  "SubWindows": [
+    {
+      "WindowID": 0,
+      "ImageType": 0,
+      "CameraName": "0",
+      "Visible": true
+    },
+    {
+      "WindowID": 1,
+      "ImageType": 3,
+      "CameraName": "0",
+      "Visible": true
+    },
+    {
+      "WindowID": 2,
+      "ImageType": 5,
+      "CameraName": "0",
+      "Visible": true
+    }
+  ],
+  "Vehicles": {
+    "Drone1": {
+      "VehicleType": "PX4Multirotor",
+      "X": 0, "Y": 0, "Z": 0,
+      "UseSerial": false,
+      "Lockstep": false,
+      "UseTcp": true,
+      "TcpPort": 4560,
+      "ControlIp": "172.28.156.208",
+      "UdpPort": 14580,
+      "LocalHostIp": "172.28.144.1"
+      
+    },
+    "Drone2": {
+      "VehicleType": "PX4Multirotor",
+      "X": 2, "Y": 0, "Z": 0,
+      "UseSerial": false,
+      "Lockstep": true,
+      "UseTcp": true,
+      "TcpPort": 4561,
+      "ControlIp": "172.28.156.208",
+      "UdpPort": 14581,
+      "LocalHostIp": "172.28.144.1"
+    },
+    "Drone3": {
+      "VehicleType": "PX4Multirotor",
+      "X": 4, "Y": 0, "Z": 0,
+      "UseSerial": false,
+      "Lockstep": true,
+      "UseTcp": true,
+      "TcpPort": 4562,
+      "ControlIp": "172.28.156.208",
+      "UdpPort": 14582,
+      "LocalHostIp": "172.28.144.1"
+    },
+    "Drone4": {
+      "VehicleType": "PX4Multirotor",
+      "X": 6, "Y": 0, "Z": 0,
+      "UseSerial": false,
+      "Lockstep": true,
+      "UseTcp": true,
+      "TcpPort": 4563,
+      "ControlIp": "172.28.156.208",
+      "UdpPort": 14583,
+      "LocalHostIp": "172.28.144.1"
+    },
+    "Drone5": {
+      "VehicleType": "PX4Multirotor",
+      "X": 8, "Y": 0, "Z": 0,
+      "UseSerial": false,
+      "Lockstep": true,
+      "UseTcp": true,
+      "TcpPort": 4564,
+      "ControlIp": "172.28.156.208",
+      "UdpPort": 14584,
+      "LocalHostIp": "172.28.144.1"
+    }
+  }
+}
