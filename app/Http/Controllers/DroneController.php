@@ -79,7 +79,7 @@ class DroneController
         $bridgeBaseURL = rtrim((string) env('AIRSIM_BRIDGE_URL', 'http://localhost:5000'), '/');
         $frameURL = null;
         
-        if (!empty($drone->sim_vehicle_name)) {
+        if ($drone->status === 'online' && !empty($drone->sim_vehicle_name)) {
             $frameURL = $bridgeBaseURL.'/frame?vehicle_name='. rawurlencode($drone->sim_vehicle_name);
         }
         return view ('dashboard', [

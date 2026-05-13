@@ -13,7 +13,9 @@
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/camera_feed.js', 'resources/css/dashboard.css'])
+        @vite(['resources/css/app.css', 'resources/js/app.js',
+         'resources/js/camera_feed.js', 'resources/css/dashboard.css',
+         'resources/js/telemetry_data.js'])
     @else
         <style>
         </style>
@@ -54,8 +56,12 @@
                     >
                 @else
                     <div class="camera-placeholder">
-                        <p>This drone is not linked to an AirSim vehicle yet...</p>
-                        <p>Set the <code>sim_vehicle_name</code> attribute for this drone to view the camera feed</p>
+                        @if ($drone->status !== 'online')
+                            <p>The drone is offline.</p>
+                        @else
+                            <p>This drone is not linked to an AirSim vehicle yet...</p>
+                            <p>Set the <code>sim_vehicle_name</code> attribute for this drone to view the camera feed</p>
+                        @endif
                     </div>
                 @endif
             </div>
