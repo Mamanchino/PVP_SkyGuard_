@@ -1,13 +1,15 @@
+from urllib import response
+
 import airsim
 import cv2
 import numpy as np
 import threading
 import time
-from flask import Flask, Response
+from flask import Flask, Response, request
 from ultralytics import YOLO
-from telemetry_data import BatteryListener
+from telemetry_data import TelemetryListener
 from flask_cors import CORS
-
+from utils import getUdpPort
 app = Flask(__name__)
 CORS(app)
 # ---------------- CONFIG ----------------
@@ -21,20 +23,22 @@ JPEG_QUALITY = 70
 
 # ---------------- YOLO MODEL ----------------
 model = YOLO("yolov8n.pt")
-
+UdpPorts = getUdpPort()
+telemetry_listener = {}
 latest_frame = None
 frame_lock = threading.Lock()
-battery_listener = BatteryListener()
+for drone_name, udp_port in UdpPorts.items():
+    telemetry_listener[drone_name] = TelemetryListener(udp_port)
 
 # ---------------- AIRSIM + YOLO LOOP ----------------
 def camera_loop():
     global latest_frame
-
+    print("Camera loop started", flush=True)
     client = airsim.MultirotorClient(
         ip=AIRSIM_HOST,
         port=AIRSIM_PORT
     )
-
+    print("Before confirmConnection", flush=True)
     client.confirmConnection()
     print("Connected to AirSim")
 
@@ -59,6 +63,7 @@ def camera_loop():
                 continue
 
             response = responses[0]
+            print("Image:", response.width, response.height, len(response.image_data_uint8))
 
             if response.width == 0 or response.height == 0:
                 continue
@@ -193,9 +198,33 @@ def video_feed():
     )
 @app.route("/battery")
 def battery():
-    return {"battery": battery_listener.get_battery()}
+    vehicle_name = request.args.get("vehicle_name")
 
+    if not vehicle_name:
+        return {"battery": None, "error": "Missing vehicle name"}, 400
+    
+    udp_port = UdpPorts.get(vehicle_name)
 
+    if udp_port is None:
+        return {"battery": None, "error": "Invalid vehicle name"}, 400
+    
+    if vehicle_name not in telemetry_listener:
+        telemetry_listener[vehicle_name] = TelemetryListener(udp_port)
+    
+    return {"battery": telemetry_listener[vehicle_name].get_battery()}
+
+@app.route("/connection_status")
+def connection_status():
+    vehicle_name = request.args.get("vehicle_name")
+    
+    if not vehicle_name:
+        return {"connection_status": None, "error": "Missing vehicle name"}, 400
+    udp_port = UdpPorts.get(vehicle_name)
+    if udp_port is None:
+        return {"connection_status": None, "error": "Invalid vehicle name"}, 400
+    if vehicle_name not in telemetry_listener:
+        telemetry_listener[vehicle_name] = TelemetryListener(udp_port)
+    return {"connection_status": telemetry_listener[vehicle_name].get_connection_status()}
 # ---------------- MAIN ----------------
 if __name__ == "__main__":
 

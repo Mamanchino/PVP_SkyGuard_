@@ -51,15 +51,15 @@
     height: 18px;
     background: white;
 }
-/* .battery-fill { */
-    /* height: 100%; */
-    /* background-color: #4caf50; green by default */
-    /* transition: width 0.3s ease; */
-/* } */
-/* .battery-percentage{
+.battery-fill { 
+    height: 100%; 
+     background-color: #4caf50; 
+     transition: width 0.3s ease;
+} 
+.battery-percentage{
     color: white;
     padding-top: 5px;
-} */
+} 
 .drone-status{
     
     padding-top: 5px;

@@ -1,6 +1,5 @@
 import './bootstrap';
 import './dropdown_menu.js';
-import './blink.js';
 import '../css/footer.css';
 import '../css/navbar.css';
 

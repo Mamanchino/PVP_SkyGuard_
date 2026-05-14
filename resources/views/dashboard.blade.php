@@ -22,7 +22,7 @@
     @endif
 </head>
 
-<body>
+<body data-vehicle-name="{{  $drone->sim_vehicle_name }}">
     <x-navbar />
     <hr class="line-spacing">
     </hr>
@@ -41,7 +41,7 @@
                     </div>
                     <p class="battery-percentage">{{ $drone->battery_level }}%</p>
                     <div class="drone-status">
-                        <p style="color: {{ $drone->status ==='online' ? '#4caf50' : '#f44336'}}">{{ $drone->status }}</p>
+                        <p class="drone-connection-status">{{ $drone->status }}</p>
                     </div>
                 </div>
                 <div class="drone-name">
