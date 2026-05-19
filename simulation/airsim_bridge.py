@@ -1,4 +1,5 @@
 from urllib import response
+import requests
 
 import airsim
 import cv2
@@ -21,6 +22,7 @@ CAMERA_NAME = "0"
 TARGET_FPS = 15
 JPEG_QUALITY = 70
 
+
 # ---------------- YOLO MODEL ----------------
 model = YOLO("yolov8n.pt")
 UdpPorts = getUdpPort()
@@ -33,6 +35,7 @@ for drone_name, udp_port in UdpPorts.items():
 # ---------------- AIRSIM + YOLO LOOP ----------------
 def camera_loop():
     global latest_frame
+    
     print("Camera loop started", flush=True)
     client = airsim.MultirotorClient(
         ip=AIRSIM_HOST,
@@ -134,7 +137,16 @@ def camera_loop():
                         (0, 255, 0),
                         2
                     )
-
+                    payload = {
+                        "drone_name" : "Drone1",
+                        "event_type" : "drone has detected an unusual activity",
+                    }
+                    try:
+                        response = requests.post("http://127.0.0.1:8000/api/drone-events", json=payload, timeout=5)
+                        response.raise_for_status()
+                        print("Success:", response.json())
+                    except requests.exceptions.RequestException as e:
+                        print("Failed to report and event", e)
             # JPEG encode
             ok, jpeg = cv2.imencode(
                 ".jpg",
@@ -198,8 +210,8 @@ def video_feed():
     )
 @app.route("/battery")
 def battery():
-    vehicle_name = request.args.get("vehicle_name")
 
+    vehicle_name = request.args.get("vehicle_name")
     if not vehicle_name:
         return {"battery": None, "error": "Missing vehicle name"}, 400
     
@@ -216,7 +228,6 @@ def battery():
 @app.route("/connection_status")
 def connection_status():
     vehicle_name = request.args.get("vehicle_name")
-    
     if not vehicle_name:
         return {"connection_status": None, "error": "Missing vehicle name"}, 400
     udp_port = UdpPorts.get(vehicle_name)

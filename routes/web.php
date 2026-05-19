@@ -8,6 +8,9 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DroneController;
+use App\Models\Drone;
+use App\Models\Event;
+use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
@@ -47,4 +50,36 @@ Route::get('/add-drone', [DroneController::class, 'get_devices'])->middleware('a
 Route::get('/dashboard/{drone}', [DroneController::class, 'showDashboard'])
     ->middleware('auth')
     ->name('drone.dashboard');
+
+
+Route::get('drone-events', function () {
+    return response()->stream(function () {
+        $lastEventId = Event::max('id') ?? 0;
+
+        while (true) {
+            $events = Event::where('id', '>', $lastEventId)
+                ->orderBy('id')
+                ->get();
+            foreach ($events as $event) {
+                $lastEventId = $event->id;
+                echo "event: person-detected\n";
+                echo 'data: ' . json_encode([
+                    'drone_id' => $event->drone_id,
+                    'event_type' => $event->event_type,
+                    'started_at' => $event->started_at,
+
+                ]) . "\n\n";
+
+                ob_flush();
+                flush();
+            }
+            sleep(1);
+        }
+
+    }, 200, [
+        'Content-Type' => 'text/event-stream',
+        'Cache-Control' => 'no-cache',
+        'Connection' => 'keep-alive',
+    ]);
+});
 
