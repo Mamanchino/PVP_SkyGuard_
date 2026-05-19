@@ -14,6 +14,8 @@ class Drone extends Model
         'is_registered',
         'user_id',
         'model',
-        'sim_vehicle_name'
+        'sim_vehicle_name',
+        'name',
+        'stream_url',
     ];
 }

@@ -48,3 +48,9 @@ Route::get('/dashboard/{drone}', [DroneController::class, 'showDashboard'])
     ->middleware('auth')
     ->name('drone.dashboard');
 
+Route::get('/streaming/{drone}', [DroneController::class, 'stream'])
+    ->middleware('auth')
+    ->name('drone.stream');
+
+Route::patch('/drones/{drone}/stream-url', [DroneController::class, 'updateStreamUrl'])->middleware('auth')->name('drone.updateStreamUrl');
+Route::delete('/drones/{drone}/remove', [DroneController::class, 'remove'])->middleware('auth')->name('drone.remove');

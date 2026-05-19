@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'pi_stream' => [
+        'url' => env('PI_STREAM_URL'),
+    ],
+
 ];

@@ -18,6 +18,7 @@ class DroneController
         $request->validate([
             'serial_number' => 'required|string|unique:drones,serial_number',
             'activation_code' => 'required|string',
+            'stream_url'     => 'nullable|url',
         ]);
 
         $drone = Drone::where('serial_number', $request->serial_number)->first();
@@ -28,6 +29,7 @@ class DroneController
                 [
                 'serial_number' => $request->serial_number,
                 'activation_code' => $request->activation_code,
+                'stream_url'      => $request->stream_url,
                 'status' => 'offline',
                 'battery_level' => 100,
                 'is_registered' => false,
@@ -57,10 +59,24 @@ class DroneController
 
         $drone->user_id = auth()->id();
         $drone->is_registered = true;
+        $drone->stream_url = env('DETECTION_STREAM_URL');
         $drone->save();
 
         return redirect()->route('add-drone')
                  ->with('success', 'Drone added successfully');
+    }
+    public function remove(Drone $drone)
+    {
+        if ($drone->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $drone->user_id = null;
+        $drone->is_registered = false;
+        $drone->stream_url = null;
+        $drone->save();
+
+        return redirect()->route('add-drone')->with('success', 'Drone removed.');
     }
     public function get_devices(){
         $userID = auth()->id();
@@ -87,6 +103,32 @@ class DroneController
             'model_img' => $this->model_img,
             'frameUrl' => $frameURL
         ]);
+    }
+    public function stream(Drone $drone)
+    {
+        if ($drone->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized access to this drone stream.');
+        }
+
+        if (!$drone->stream_url) {
+            abort(404, 'No stream configured for this drone.');
+        }
+
+        return view('streaming', [
+            'drone'     => $drone,
+            'streamUrl' => $drone->stream_url,
+        ]);
+    }
+    public function updateStreamUrl(Request $request, Drone $drone)
+    {
+        if ($drone->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate(['stream_url' => 'required|url']);
+        $drone->update(['stream_url' => $request->stream_url]);
+
+        return back()->with('success', 'Stream URL updated.');
     }
 }
 ?>
