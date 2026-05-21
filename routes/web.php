@@ -52,6 +52,8 @@ Route::get('/dashboard/{drone}', [DroneController::class, 'showDashboard'])
     ->name('drone.dashboard');
 
 
+
+
 Route::get('drone-events', function () {
     return response()->stream(function () {
         $lastEventId = Event::max('id') ?? 0;

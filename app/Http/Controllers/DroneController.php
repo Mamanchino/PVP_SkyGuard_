@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Drone;
+use App\Models\Event;
 
 class DroneController
 {
@@ -79,14 +80,19 @@ class DroneController
         $bridgeBaseURL = rtrim((string) env('AIRSIM_BRIDGE_URL', 'http://localhost:5000'), '/');
         $frameURL = null;
         
+        
         if (!empty($drone->sim_vehicle_name)) {
             $frameURL = $bridgeBaseURL.'/frame?vehicle_name='. rawurlencode($drone->sim_vehicle_name);
         }
+        $events = Event::where('drone_id', $drone->id)-> orderByDesc('started_at')->get();
+
         return view ('dashboard', [
             'drone' => $drone,
             'model_img' => $this->model_img,
-            'frameUrl' => $frameURL
+            'frameUrl' => $frameURL,
+            'events' => $events,
         ]);
     }
+     
 }
 ?>

@@ -18,7 +18,7 @@ Route::post('/drone-events', function(Request $request){
     $drone_name = $drone->name;
     Event::create([
         'drone_id' => $drone->id,
-        'event_type' => "{$drone_name} ' ' {$validated['event_type']}",
+        'event_type' => "{$validated['event_type']}",
         'started_at' => now(),
     ]);
 
