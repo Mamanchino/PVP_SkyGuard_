@@ -12,13 +12,14 @@ Route::post('/drone-events', function(Request $request){
     $validated = $request->validate([
         'drone_name' => 'required|string',
         'event_type' => 'required|string',
+        'severity' =>   'required|string',
 
     ]);
     $drone = Drone::where('sim_vehicle_name', $validated['drone_name']) -> firstOrFail();
-    $drone_name = $drone->name;
     Event::create([
         'drone_id' => $drone->id,
         'event_type' => "{$validated['event_type']}",
+        'severity' => "{$validated['severity']}",
         'started_at' => now(),
     ]);
 

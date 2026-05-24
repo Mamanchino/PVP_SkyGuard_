@@ -10,6 +10,9 @@ class Event extends Model
         'id',
         'drone_id',
         'event_type',
+        'severity',
         'started_at',
+        'read_at',
+        'resolved_at',
     ];
 }

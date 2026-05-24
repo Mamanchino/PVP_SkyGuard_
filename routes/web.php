@@ -57,12 +57,14 @@ Route::get('/streaming/{drone}', [DroneController::class, 'stream'])
 
 
 
-Route::get('drone-events', function () {
-    return response()->stream(function () {
-        $lastEventId = Event::max('id') ?? 0;
+Route::get('drone-events', function (Drone $drone, Request $request) {
+    abort_unless($drone->user_id === auth()->id(), 403);
+    return response()->stream(function () use ($drone, $request) {
+        $lastEventId = (int) $request->query('last_event_id', 0);
 
-        while (true) {
-            $events = Event::where('id', '>', $lastEventId)
+        while (!connection_aborted()) {
+            $events = Event::where('drone_id',  $drone->id)
+                ->where('id', '>', $lastEventId)    
                 ->orderBy('id')
                 ->get();
             foreach ($events as $event) {
@@ -71,11 +73,14 @@ Route::get('drone-events', function () {
                 echo 'data: ' . json_encode([
                     'drone_id' => $event->drone_id,
                     'event_type' => $event->event_type,
+                    'severity' => $event->severity,
                     'started_at' => $event->started_at,
-
+                    'read_at' => $event->read_at,
+                    'resolved_at' => $event->resolved_at
+                    
                 ]) . "\n\n";
 
-                ob_flush();
+                @ob_flush();
                 flush();
             }
             sleep(1);
@@ -85,8 +90,9 @@ Route::get('drone-events', function () {
         'Content-Type' => 'text/event-stream',
         'Cache-Control' => 'no-cache',
         'Connection' => 'keep-alive',
+        'X-Accel-Buffering' => 'no',
     ]);
-});
+})->middleware('auth');
 
 
 Route::patch('/drones/{drone}/stream-url', [DroneController::class, 'updateStreamUrl'])->middleware('auth')->name('drone.updateStreamUrl');

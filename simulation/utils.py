@@ -1,17 +1,16 @@
 import json
-
+from pathlib import Path
 def getUdpPort():
-    with open("./simulation/settings.json", "r") as file:
+    settings_path = Path(__file__).with_name('settings.json')
+    with settings_path.open("r") as file:
         data = json.load(file)
 
-    forwared_ports = {
-        "Drone1": 14680,
-        "Drone4": 14683,
-        "Drone5": 14684
-    }
+    udp_ports = {}
 
-    udp_port = {}
+    for vehicle_name, vehicle_config in data["Vehicles"].items():
+        udp_port = vehicle_config.get("UdpPort") + 100
+        if udp_port is None:
+            continue
 
-    for vehicle_name in data["Vehicles"]:
-        udp_port[vehicle_name] = "udpin:0.0.0.0:" + str(forwared_ports[vehicle_name])
-    return udp_port
+        udp_ports[vehicle_name] = "udpin:0.0.0.0:" + str(udp_port)   
+    return udp_ports

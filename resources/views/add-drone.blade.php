@@ -9,55 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-    <style>
-        .remove-btn {
-            background: rgba(244, 67, 54, 0.15);
-            border: 1px solid rgba(244, 67, 54, 0.4);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #f44336;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .remove-btn:hover {
-            background: rgba(244, 67, 54, 0.35);
-            border-color: #f44336;
-        }
-        .stream-btn {
-            background: rgba(79, 195, 176, 0.15);
-            border: 1px solid rgba(79, 195, 176, 0.4);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #4fc3b0;
-            transition: background 0.2s, border-color 0.2s;
-            text-decoration: none;
-        }
-        .stream-btn:hover {
-            background: rgba(79, 195, 176, 0.35);
-            border-color: #4fc3b0;
-        }
-        .device-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            align-items: center;
-            padding: 10px 0 6px;
-        }
-        .remove-form {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/add.css', 'resources/js/app.js', 'resources/js/add-device-modal.js'])

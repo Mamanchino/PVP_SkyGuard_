@@ -25,12 +25,13 @@ JPEG_QUALITY = 70
 
 # ---------------- YOLO MODEL ----------------
 model = YOLO("yolov8n.pt")
+current_vehicle = None
 UdpPorts = getUdpPort()
 telemetry_listener = {}
 latest_frame = None
 frame_lock = threading.Lock()
 for drone_name, udp_port in UdpPorts.items():
-    telemetry_listener[drone_name] = TelemetryListener(udp_port)
+    telemetry_listener[drone_name] = TelemetryListener(drone_name, udp_port)
 
 # ---------------- AIRSIM + YOLO LOOP ----------------
 def camera_loop():
@@ -137,16 +138,7 @@ def camera_loop():
                         (0, 255, 0),
                         2
                     )
-                    payload = {
-                        "drone_name" : "Drone1",
-                        "event_type" : "drone has detected an unusual activity",
-                    }
-                    try:
-                        response = requests.post("http://127.0.0.1:8000/api/drone-events", json=payload, timeout=5)
-                        response.raise_for_status()
-                        print("Success:", response.json())
-                    except requests.exceptions.RequestException as e:
-                        print("Failed to report and event", e)
+                    send_event(current_vehicle, "Drone has detected an unusual activit", severity="info")
             # JPEG encode
             ok, jpeg = cv2.imencode(
                 ".jpg",
@@ -180,6 +172,7 @@ def generate_frames():
             frame = latest_frame
 
         if frame is None:
+            send_event(current_vehicle, "Live camera feed was lost", severity="error")
             blank = np.zeros(
                 (480, 640, 3),
                 dtype=np.uint8
@@ -204,26 +197,27 @@ def generate_frames():
 @app.route("/video_feed")
 @app.route("/frame")
 def video_feed():
+    global current_vehicle
+    vehicle_name = request.args.get("vehicle_name")
+    current_vehicle = vehicle_name
     return Response(
         generate_frames(),
         mimetype="multipart/x-mixed-replace; boundary=frame"
     )
 @app.route("/battery")
 def battery():
-
-    vehicle_name = request.args.get("vehicle_name")
-    if not vehicle_name:
+    if not current_vehicle:
         return {"battery": None, "error": "Missing vehicle name"}, 400
     
-    udp_port = UdpPorts.get(vehicle_name)
+    udp_port = UdpPorts.get(current_vehicle)
 
     if udp_port is None:
         return {"battery": None, "error": "Invalid vehicle name"}, 400
     
-    if vehicle_name not in telemetry_listener:
-        telemetry_listener[vehicle_name] = TelemetryListener(udp_port)
+    if current_vehicle not in telemetry_listener:
+        telemetry_listener[current_vehicle] = TelemetryListener(udp_port)
     
-    return {"battery": telemetry_listener[vehicle_name].get_battery()}
+    return {"battery": telemetry_listener[current_vehicle].get_battery()}
 
 @app.route("/connection_status")
 def connection_status():
@@ -236,6 +230,23 @@ def connection_status():
     if vehicle_name not in telemetry_listener:
         telemetry_listener[vehicle_name] = TelemetryListener(udp_port)
     return {"connection_status": telemetry_listener[vehicle_name].get_connection_status()}
+
+def send_event(drone_name, event_type, severity="info"):
+        try:
+            response = requests.post(
+                "http://127.0.0.1:8000/api/drone-events",
+                json={
+                    "drone_name": drone_name,
+                    "event_type": event_type,
+                    "severity": severity,
+                },
+                timeout=2
+            )
+            response.raise_for_status()
+            print("Event.sent", response.json())
+        except requests.RequestException as e:
+            print("Failed to send event: ", e)
+
 # ---------------- MAIN ----------------
 if __name__ == "__main__":
 
