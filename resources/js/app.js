@@ -2,6 +2,7 @@ import './bootstrap';
 import './dropdown_menu.js';
 import '../css/footer.css';
 import '../css/navbar.css';
+import './dashboard.js';
 
 // ── Signup page ──
 document.addEventListener('DOMContentLoaded', () => {

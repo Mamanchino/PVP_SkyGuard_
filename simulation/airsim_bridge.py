@@ -70,7 +70,6 @@ def camera_loop():
                 continue
 
             response = responses[0]
-            print("Image:", response.width, response.height, len(response.image_data_uint8))
 
             if response.width == 0 or response.height == 0:
                 continue

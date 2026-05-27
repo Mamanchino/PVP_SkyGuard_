@@ -20,7 +20,7 @@
         'resources/css/dashboard.css',
         'resources/js/telemetry_data.js',
         'resources/js/mark_read.js',
-        'resources/js/dashboard.js',
+       
     ])
     @else
         <style>
@@ -30,7 +30,8 @@
 
 <body  data-vehicle-name="{{ $drone->sim_vehicle_name }}"
     data-drone-id="{{ $drone->id }}"
-    data-last-event-id="{{ $events->max('id') ?? 0 }}">
+    data-last-event-id="{{ $events->max('id') ?? 0 }}"
+    data-drone-name="{{ $drone->name }}">
     <x-navbar :events="$events" :drone="$drone" />
     <hr class="line-spacing">
     </hr>
