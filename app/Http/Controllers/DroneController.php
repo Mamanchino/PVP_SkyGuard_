@@ -135,5 +135,72 @@ class DroneController
 
         return back()->with('success', 'Stream URL updated.');
     }
+
+    public function sendNotification(Drone $drone, Request $request){
+        $lastEventId = (int) $request->query('last_event_id', 0);
+        $notification = Event::where('drone_id', $drone->id)
+            ->where('id', '>', $lastEventId)->orderBy('id')->get();
+        foreach ($notification as $event) {
+            if($event){
+                $lastEventId = $event->id;
+                echo "event: person-detected\n";
+                echo 'data: ' .json_encode([
+                    'drone_id' => $event->drone_id,
+                    'event_type' => $event->event_type,
+                    'severity' => $event->severity,
+                    'started_at' => $event->started_at,
+                    'read_at' => $event->read_at,
+                    'resolved_at' => $event->resolved_at
+                ])."\n\n";
+            }
+            else {
+                "\n\n";
+            }
+        }
+        header('Content-type: text/event-stream');
+        header('Cache-control: no-cache');
+        header('Connection: keep-alive');
+        ob_flush();
+        flush();
+
+
+
+
+
+    //     abort_unless($drone->user_id === auth()->id(), 403);
+    // return response()->stream(function () use ($drone, $request) {
+    //     $lastEventId = (int) $request->query('last_event_id', 0);
+
+    //     while (!connection_aborted()) {
+    //         $events = Event::where('drone_id',  $drone->id)
+    //             ->where('id', '>', $lastEventId)    
+    //             ->orderBy('id')
+    //             ->get();
+    //         foreach ($events as $event) {
+    //             $lastEventId = $event->id;
+    //             echo "event: person-detected\n";
+    //             echo 'data: ' . json_encode([
+    //                 'drone_id' => $event->drone_id,
+    //                 'event_type' => $event->event_type,
+    //                 'severity' => $event->severity,
+    //                 'started_at' => $event->started_at,
+    //                 'read_at' => $event->read_at,
+    //                 'resolved_at' => $event->resolved_at
+                    
+    //             ]) . "\n\n";
+
+    //             @ob_flush();
+    //             flush();
+    //         }
+    //         sleep(1);
+    //     }
+
+    // }, 200, [
+    //     'Content-Type' => 'text/event-stream',
+    //     'Cache-Control' => 'no-cache',
+    //     'Connection' => 'keep-alive',
+    //     'X-Accel-Buffering' => 'no',
+    // ]);
+    }
 }
 ?>

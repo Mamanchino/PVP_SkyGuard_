@@ -75,9 +75,9 @@ header{
  .alert-menu .dropdown-item{
     display:block;
 }
-.divider{
+.dropdown-menu .divider{
     display: flex;
-    width: 12em;
+    width: 11em;
     margin: 4px auto 0;
 }
 .error-message{
@@ -114,9 +114,8 @@ button.alert-notif{
     position: absolute;
     left: 22px;
     top: 19px;
-    border: 1px solid red;
+    border: 1px solid rgb(none);
     border-radius: 50%;
-    background-color:  red;
     width: 10px;
     height: 10px;
     z-index: 1;

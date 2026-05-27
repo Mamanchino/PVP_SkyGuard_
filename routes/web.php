@@ -8,9 +8,11 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\DroneController;
+use App\Http\Controllers\EventController;
 use App\Models\Drone;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use PHPUnit\Event\EventCollection;
 
 
 Route::get('/', function () {
@@ -57,43 +59,21 @@ Route::get('/streaming/{drone}', [DroneController::class, 'stream'])
 
 
 
-Route::get('drone-events', function (Drone $drone, Request $request) {
-    abort_unless($drone->user_id === auth()->id(), 403);
-    return response()->stream(function () use ($drone, $request) {
-        $lastEventId = (int) $request->query('last_event_id', 0);
+Route::get('/drones/{drone}/drone-events', [DroneController::class, 'sendNotification'])  ->middleware('auth');
 
-        while (!connection_aborted()) {
-            $events = Event::where('drone_id',  $drone->id)
-                ->where('id', '>', $lastEventId)    
-                ->orderBy('id')
-                ->get();
-            foreach ($events as $event) {
-                $lastEventId = $event->id;
-                echo "event: person-detected\n";
-                echo 'data: ' . json_encode([
-                    'drone_id' => $event->drone_id,
-                    'event_type' => $event->event_type,
-                    'severity' => $event->severity,
-                    'started_at' => $event->started_at,
-                    'read_at' => $event->read_at,
-                    'resolved_at' => $event->resolved_at
-                    
-                ]) . "\n\n";
-
-                @ob_flush();
-                flush();
-            }
-            sleep(1);
-        }
-
-    }, 200, [
-        'Content-Type' => 'text/event-stream',
-        'Cache-Control' => 'no-cache',
-        'Connection' => 'keep-alive',
-        'X-Accel-Buffering' => 'no',
-    ]);
-})->middleware('auth');
-
+// Route::get('/drones/{drone/alerts', function (Drone $drone){
+//     abort_unless($drone->user_id === auth()->id(), 403);
+//     $alerts = Event::where('drone_id', $drone->id)
+//         ->whereIn('severity', ['critical', 'error'])
+//         ->whereNull('resolved_at')
+//         ->whereNull('read_at')
+//         ->exists();
+//     return response()->json([
+//         'has_alerts' => $alerts,
+//     ]);
+// })->middleware('auth');
 
 Route::patch('/drones/{drone}/stream-url', [DroneController::class, 'updateStreamUrl'])->middleware('auth')->name('drone.updateStreamUrl');
 Route::delete('/drones/{drone}/remove', [DroneController::class, 'remove'])->middleware('auth')->name('drone.remove');
+
+Route::post("/alerts/{event}/read", [EventController::class, 'markRead'])->middleware('auth')->name('alerts.read');

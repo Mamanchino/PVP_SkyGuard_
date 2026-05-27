@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'SkyGuard') }}</title>
 
     <!-- Fonts -->
@@ -18,7 +18,9 @@
         'resources/js/app.js',
         'resources/js/camera_feed.js',
         'resources/css/dashboard.css',
-        'resources/js/telemetry_data.js'
+        'resources/js/telemetry_data.js',
+        'resources/js/mark_read.js',
+        'resources/js/dashboard.js',
     ])
     @else
         <style>
@@ -26,7 +28,9 @@
     @endif
 </head>
 
-<body data-vehicle-name="{{  $drone->sim_vehicle_name }}">
+<body  data-vehicle-name="{{ $drone->sim_vehicle_name }}"
+    data-drone-id="{{ $drone->id }}"
+    data-last-event-id="{{ $events->max('id') ?? 0 }}">
     <x-navbar :events="$events" :drone="$drone" />
     <hr class="line-spacing">
     </hr>

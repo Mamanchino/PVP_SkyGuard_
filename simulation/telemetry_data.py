@@ -13,6 +13,7 @@ class TelemetryListener:
         self.connection_status=None
         self.last_connection_time=None
         self.low_battery_sent = False
+        self.connection_status_sent = False
         self.running=True
         self.thread=threading.Thread(target=self._loop, daemon=True)
         self.thread.start()
@@ -49,10 +50,12 @@ class TelemetryListener:
                     level=msg.battery_remaining
                     if level != -1:
                         self.battery_level = level
-            connection_time = time.time()
-            self.connection_status = (self.last_connection_time is not None and connection_time < ONLINE_THRESHOLD)
-            if connection_time >= 5:
+            self.connection_status = (self.last_connection_time is not None and time.time() - self.last_connection_time < ONLINE_THRESHOLD)
+            if not self.connection_status and not self.connection_status_sent:
                 self.send_event(self.drone_name, "Connection was lost with the drone", severity='error')
+                self.connection_status_sent = True
+            elif self.connection_status:
+                self.connection_status_sent = False
             # print(f"Connection status for {self.connection_string}: {'Online' if self.connection_status else 'Offline'}")
             # if msg.get_type() == "BATTERY_STATUS":
             #     print("BATTERY_STATUS battery_remaining:", msg.battery_remaining)

@@ -34,8 +34,11 @@ for drone_name, udp_port in UdpPorts.items():
     telemetry_listener[drone_name] = TelemetryListener(drone_name, udp_port)
 
 # ---------------- AIRSIM + YOLO LOOP ----------------
+person_detection_sent = False
+last_person_seen_at = 0
+PERSON_LOST_RESET_SECONDS = 5
 def camera_loop():
-    global latest_frame
+    global latest_frame, person_detection_sent, last_person_seen_at
     
     print("Camera loop started", flush=True)
     client = airsim.MultirotorClient(
@@ -57,7 +60,7 @@ def camera_loop():
 
     while True:
         start = time.perf_counter()
-
+        
         try:
             responses = client.simGetImages(
                 [image_request]
@@ -98,9 +101,9 @@ def camera_loop():
                 verbose=False
             )
 
+            person_seen_this_frame = False
             for r in results:
                 for box in r.boxes:
-
                     cls = int(box.cls[0])
 
                     # person class = 0
@@ -138,7 +141,15 @@ def camera_loop():
                         (0, 255, 0),
                         2
                     )
-                    send_event(current_vehicle, "Drone has detected an unusual activit", severity="info")
+                    person_seen_this_frame = True
+                    last_person_seen_at = time.time()
+                    if not person_detection_sent:
+                        send_event(current_vehicle, "Drone has detected an unusual activity", severity="info")
+                        person_detection_sent = True
+            
+            if person_detection_sent and not person_seen_this_frame:
+                if time.time() - last_person_seen_at > PERSON_LOST_RESET_SECONDS:
+                    person_detection_sent = False
             # JPEG encode
             ok, jpeg = cv2.imencode(
                 ".jpg",
@@ -221,15 +232,15 @@ def battery():
 
 @app.route("/connection_status")
 def connection_status():
-    vehicle_name = request.args.get("vehicle_name")
-    if not vehicle_name:
+
+    if not current_vehicle:
         return {"connection_status": None, "error": "Missing vehicle name"}, 400
-    udp_port = UdpPorts.get(vehicle_name)
+    udp_port = UdpPorts.get(current_vehicle)
     if udp_port is None:
         return {"connection_status": None, "error": "Invalid vehicle name"}, 400
-    if vehicle_name not in telemetry_listener:
-        telemetry_listener[vehicle_name] = TelemetryListener(udp_port)
-    return {"connection_status": telemetry_listener[vehicle_name].get_connection_status()}
+    if current_vehicle not in telemetry_listener:
+        telemetry_listener[current_vehicle] = TelemetryListener(udp_port)
+    return {"connection_status": telemetry_listener[current_vehicle].get_connection_status()}
 
 def send_event(drone_name, event_type, severity="info"):
         try:

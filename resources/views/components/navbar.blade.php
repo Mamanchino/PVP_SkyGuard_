@@ -1,6 +1,8 @@
+
+
 <header class="navbar">
     @php
-        $alerts = $events->whereIn('severity', ['critical', 'error'])->whereNull('resolved_at');
+        $alerts = $events->whereIn('severity', ['critical', 'error'])->whereNull('resolved_at')->whereNull('read_at');
     @endphp
     @if (Route::has('login'))
     
@@ -10,12 +12,12 @@
                 <div class="navbar-actions">
                     <div class="error-container">
                         <div class="dropdown-wrapper">
-                            <button class="dropdown-trigger alert-notif">
+                            <button class="dropdown-trigger alert-notif" data-alert-ids="{{  $alerts->pluck('id')->join(',') }}">
                                 <span class="num-alerts"> </span>
                             </button>
                             <div class="dropdown-menu alert-menu">
                                 @forelse($alerts as $event)
-                                    <div class="dropdown-item ">
+                                    <div class="dropdown-item alert-item" data-alert-id="{{ $event->id }}">
                                         <strong class="drone-name-error">{{ $drone->name }}</strong>
                                         <p class="error-message">{{ $event->event_type }} </p>
                                         <hr class="divider">

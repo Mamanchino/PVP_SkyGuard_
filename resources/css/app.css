@@ -126,7 +126,7 @@ header{
     text-align: center;
     justify-content: center;
 }
-.divider{
+.info-card .divider{
     width: 0.5px;
     height: 90%;
     background-color: black;

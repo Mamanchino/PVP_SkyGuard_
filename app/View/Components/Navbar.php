@@ -17,6 +17,7 @@ class Navbar extends Component
     {
         $this->events = $events ?? collect();
         $this->drone = $drone;
+        
     }
 
     /**
