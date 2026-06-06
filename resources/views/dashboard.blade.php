@@ -20,6 +20,7 @@
         'resources/css/dashboard.css',
         'resources/js/telemetry_data.js',
         'resources/js/mark_read.js',
+        'resources/js/dashboard.js',
        
     ])
     @else

@@ -6,6 +6,10 @@ const droneName = document.body.dataset.droneName;
 const pane = document.querySelector('.notification-pane');
 const listContaienr = document.querySelector('.notification-list');
 
+const errorPane = document.getElementById('error-pane');
+const errorConatiner = document.getElementById('alert-menu');
+const currentErrors = [];
+
 const events = new EventSource(`/drones/${droneId}/drone-events?last_event_id=${lastEventId}`);
 console.log("dashboard.js loaded");
 console.log("droneId:", droneId);
@@ -24,9 +28,7 @@ events.onmessage = (event) => {
     } else {
         proccesNotifications(notifications)
     }
-    // if (['critical', 'error'].includes(data.severity)) {
-        //     showAlertIndicator();
-        // }
+    
 };
 events.onerror = (error) => {
     console.error("Event source failed or disconnected", error);
@@ -34,6 +36,14 @@ events.onerror = (error) => {
 function proccesNotifications(data){
     if (data.severity === 'info'){
         addNotification(data);
+    }
+    
+    if (data.severity === 'critical' || data.severity === 'error'){
+        if(!currentErrors.includes(data.id)){
+            console.log("SSE ERROR received", data.event_type);
+            addAlertNotification(data);
+            currentErrors.push(data.id);
+        }
     }
 
 }
@@ -63,12 +73,27 @@ function addNotification(event) {
     listContaienr.insertBefore(item, listContaienr.firstChild);
 }
 
-// function showAlertIndicator() {
-//     const alertIndicator = document.querySelector('.num-alerts');
+function addAlertNotification(data){
+    if(!errorPane) return;
+    
+    const errorItem = document.createElement('div');
+    errorItem.className = 'dropdown-item alert-item';
+    errorItem.innerHTML = `
+        <strong class="drone-name-error">${droneName}</strong>
+        <p class="error-message">${data.event_type} </p>
+        <hr class="divider">
+    `;
 
-//     if (alertIndicator) {
-//         alertIndicator.style.backgroundColor = 'red';
-//         alertIndicator.style.opacity = '1';
-//     }
-// }
+    errorConatiner.insertBefore(errorItem, errorConatiner.firstChild);
+
+}
+
+function showalertindicator() {
+    const alertindicator = document.getElementById('alert-indicator');
+
+    if (alertindicator) {
+        alertindicator.style.backgroundcolor = 'red';
+        alertindicator.style.opacity = '1';
+    }
+}
 

@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    background: #0d0f10;
+    color: #f5f5f5;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.services-page {
+    width: min(1120px, 90%);
+    margin: 0 auto;
+    padding: 90px 0 110px;
+}
+
+.services-hero {
+    max-width: 920px;
+    margin-bottom: 90px;
+}
+
+.services-label {
+    margin-bottom: 22px;
+    color: #00a67e;
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.services-hero h1 {
+    max-width: 960px;
+    margin: 0 0 32px;
+    color: #f5f5f5;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.services-hero p {
+    max-width: 720px;
+    color: #a6abb3;
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    border: 1px solid #2a2e33;
+    background: #2a2e33;
+}
+
+.service-card {
+    min-height: 420px;
+    padding: 34px;
+    background: #101315;
+}
+
+.service-card span {
+    color: #00a67e;
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+}
+
+.service-card h2 {
+    margin: 42px 0 20px;
+    color: #f5f5f5;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.service-card p {
+    color: #a6abb3;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.service-card ul {
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.service-card li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 14px;
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.service-card li::before {
+    content: "/";
+    position: absolute;
+    left: 0;
+    color: #00a67e;
+    font-family: "Geist Mono", monospace;
+}
+
+@media (max-width: 850px) {
+    .services-page {
+        width: min(100% - 32px, 680px);
+        padding: 60px 0 80px;
+    }
+
+    .services-hero {
+        margin-bottom: 64px;
+    }
+
+    .services-hero h1 {
+        font-size: 44px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        min-height: auto;
+        padding: 28px;
+    }
+
+    .service-card h2 {
+        font-size: 25px;
+    }
+}

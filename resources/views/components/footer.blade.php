@@ -7,21 +7,21 @@
                 <div class="footer-column">
                     <h4>Team</h4>
                     <ul>
-                        <li> <a href="###">About Us</a></li>
-                        <li> <a href="###">Our Serivces</a></li>
+                        <li> <a href="{{ route('about-us') }}">About Us</a></li>
+                        <li> <a href="{{ route('our-services') }}">Our Services</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4> Get Help</h4>
                     <ul>
-                        <li><a href="###">FAQ</a></li>
+                        <li><a href="{{ route('faq') }}">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4> Use Cases</h4>
                     <ul>
-                        <li><a href="###">Industrial</a></li>
-                        <li><a href="###">Comercial</a></li>
+                        <li><a href="{{ route('industrial') }}">Industrial</a></li>
+                        <li><a href="{{ route('commercial') }}">Commercial</a></li>
                     </ul>
                 </div>
             </div>

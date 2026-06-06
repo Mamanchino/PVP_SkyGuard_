@@ -72,6 +72,10 @@ header{
 .account-menu .dropdown-item {
     display:flex;
 }
+.dropdown-menu.alert-menu{
+    overflow-y: scroll;
+    max-height: 10em;
+}
  .alert-menu .dropdown-item{
     display:block;
 }

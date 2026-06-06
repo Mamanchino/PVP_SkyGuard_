@@ -7,24 +7,32 @@
     @if (Route::has('login'))
     
         <div class="navbar-container">
-            <img src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
-            @auth
+            <div class="logo">
+                <a href="{{ route('home') }}">
+                    <img  src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
+                </a>
+            </div>
+                @auth
                 <div class="navbar-actions">
-                    <div class="error-container">
-                        <div class="dropdown-wrapper">
-                            <button class="dropdown-trigger alert-notif" data-alert-ids="{{  $alerts->pluck('id')->join(',') }}">
-                                <span class="num-alerts"> </span>
-                            </button>
-                            <div class="dropdown-menu alert-menu">
-                                @forelse($alerts as $event)
+                    <div class="error-pane" id="error-pane">
+
+                        <div class="error-container" id="error-container">
+                            <div class="dropdown-wrapper">
+                                <button class="dropdown-trigger alert-notif" data-alert-ids="{{  $alerts->pluck('id')->join(',') }}">
+                                    <span class="num-alerts" id="alert-indicator"> </span>
+                                </button>
+                                <div class="dropdown-menu alert-menu" id="alert-menu">
+
+                                    @forelse($alerts as $event)
                                     <div class="dropdown-item alert-item" data-alert-id="{{ $event->id }}">
                                         <strong class="drone-name-error">{{ $drone->name }}</strong>
                                         <p class="error-message">{{ $event->event_type }} </p>
                                         <hr class="divider">
                                     </div>
-                                @empty
+                                    @empty
                                     <div class="dropdown-item">No current errors</div>
-                                @endforelse
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
                     </div>

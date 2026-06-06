@@ -77,3 +77,9 @@ Route::patch('/drones/{drone}/stream-url', [DroneController::class, 'updateStrea
 Route::delete('/drones/{drone}/remove', [DroneController::class, 'remove'])->middleware('auth')->name('drone.remove');
 
 Route::post("/alerts/{event}/read", [EventController::class, 'markRead'])->middleware('auth')->name('alerts.read');
+
+Route::get('/about_us', function (Request $request) {return view('about_us');})->name('about-us');
+Route::get('/our_services', function (Request $request) {return view('our-services');})->name('our-services');
+Route::get('/faq', function (Request $request) {return view('faq');})->name('faq');
+Route::get('/industrial', function (Request $request) {return view('industrial');})->name('industrial');
+Route::get('/commercial', function (Request $request) {return view('commercial');})->name('commercial');
