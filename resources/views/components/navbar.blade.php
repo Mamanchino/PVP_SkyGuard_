@@ -1,36 +1,40 @@
-
-
 <header class="navbar">
     @php
         $alerts = $events->whereIn('severity', ['critical', 'error'])->whereNull('resolved_at')->whereNull('read_at');
+
     @endphp
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/js/navbar_background.js', 'resources/js/menu_toggle.js'])
+    @endif
     @if (Route::has('login'))
-    
+
         <div class="navbar-container">
             <div class="logo">
                 <a href="{{ route('home') }}">
-                    <img  src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
+                    <img class="logo-icon-default" src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
+                    <img class="logo-icon" src="{{ Vite::asset('resources/images/Icon.png') }}" class="h-10">
                 </a>
             </div>
-                @auth
+            @auth
                 <div class="navbar-actions">
                     <div class="error-pane" id="error-pane">
 
                         <div class="error-container" id="error-container">
                             <div class="dropdown-wrapper">
-                                <button class="dropdown-trigger alert-notif" data-alert-ids="{{  $alerts->pluck('id')->join(',') }}">
+                                <button class="dropdown-trigger alert-notif"
+                                    data-alert-ids="{{  $alerts->pluck('id')->join(',') }}">
                                     <span class="num-alerts" id="alert-indicator"> </span>
                                 </button>
                                 <div class="dropdown-menu alert-menu" id="alert-menu">
 
                                     @forelse($alerts as $event)
-                                    <div class="dropdown-item alert-item" data-alert-id="{{ $event->id }}">
-                                        <strong class="drone-name-error">{{ $drone->name }}</strong>
-                                        <p class="error-message">{{ $event->event_type }} </p>
-                                        <hr class="divider">
-                                    </div>
+                                        <div class="dropdown-item alert-item" data-alert-id="{{ $event->id }}">
+                                            <strong class="drone-name-error">{{ $drone->name }}</strong>
+                                            <p class="error-message">{{ $event->event_type }} </p>
+                                            <hr class="divider">
+                                        </div>
                                     @empty
-                                    <div class="dropdown-item">No current errors</div>
+                                        <div class="dropdown-item empty-alert-item">No current errors</div>
                                     @endforelse
                                 </div>
                             </div>
@@ -77,23 +81,30 @@
             @endauth
             @guest
 
-                <ul class="nav-links">
-                    <li>
-                        <form method="GET" action="{{ route('login') }}" class="link">
-                            @csrf
-                            <button type="submit" class="">Log in</button>
-                        </form>
-                    </li>
-                    <li>
-
-                        <form method="GET" action="{{ route('signup') }}" class="link">
-                            @csrf
-                            <button type="submit" class="">Sign up</button>
-                        </form>
-
-                    </li>
-                </ul>
+                <nav class="nav-links">
+                    <div class="nav-link-items">
+                        <li>
+                            <form method="GET" action="{{ route('login') }}" class="link">
+                                @csrf
+                                <button type="submit" class="">Log in</button>
+                            </form>
+                        </li>
+                        <li> 
+                            <form method="GET" action="{{ route('signup') }}" class="link">
+                                @csrf
+                                <button type="submit" class="">Sign up</button>
+                            </form>
+                            
+                        </li>
+                    </div>
+                    <button class="menu-toggle" onclick="toggle()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20">
+                            <path fill="#fff" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        </svg>
+                    </button>
+                </nav>
             @endguest
         </div>
     @endif
+    <br>
 </header>

@@ -16,6 +16,12 @@ Route::post('/drone-events', function(Request $request){
 
     ]);
     $drone = Drone::where('sim_vehicle_name', $validated['drone_name']) -> firstOrFail();
+    logger('EVENT CREATED FROM PYTHON', [
+    'drone_name' => $validated['drone_name'],
+    'event_type' => $validated['event_type'],
+    'severity' => $validated['severity'],
+    'time' => now()->toDateTimeString(),
+]);
     Event::create([
         'drone_id' => $drone->id,
         'event_type' => "{$validated['event_type']}",

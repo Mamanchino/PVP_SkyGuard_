@@ -1,11 +1,20 @@
 @import 'tailwindcss';
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     color: #787C82;
     margin: 0;
     padding: 0;
-    background-color: #0d0f10;
+    background: radial-gradient(circle at center,
+            #1a1a1e 0%,
+            #0E0E10 45%,
+            #000000 100%);
     /* background-image: url('../images/background.png'); */
     background-size: cover;
     background-position: center;
@@ -17,16 +26,17 @@ body {
     align-items: center; */
 }
 
-header{
+header {
     background-color: #0d0f10;
 }
 
-.nav-links{
+.nav-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
-.nav-links li{
+
+.nav-links li {
     display: inline-block;
     margin-left: 20px;
 }
@@ -48,7 +58,8 @@ header{
     position: relative;
     z-index: 2;
 }
-.link button{
+
+.link button {
     padding: 10px 20px;
     cursor: pointer;
 }
@@ -67,24 +78,28 @@ header{
     transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
     z-index: 1;
 }
+
 .link:hover::after {
     left: 120%;
 }
-.info-1-container{
+
+.info-1-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
-.info-1_1{
+
+.info-1_1 {
     width: 350px;
     height: 300px;
     border: 1px solid grey;
     align-content: center;
     text-align: center;
 }
-.info-2-container{
+
+.info-2-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -92,7 +107,8 @@ header{
     align-items: center;
     height: 100%;
 }
-.info-2_1{
+
+.info-2_1 {
     width: 350px;
     height: 200px;
     border: 1px solid grey;
@@ -100,8 +116,9 @@ header{
     text-align: center;
 
 }
-.info-2_2{
-    
+
+.info-2_2 {
+
     width: 350px;
     height: 200px;
     border: 1px solid grey;
@@ -109,7 +126,8 @@ header{
     text-align: center;
 
 }
-.info-3-container{
+
+.info-3-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -117,7 +135,8 @@ header{
     align-items: center;
     height: 100%;
 }
-.info-3_1{
+
+.info-3_1 {
     margin: 0 auto;
     width: 300px;
     height: 200px;
@@ -126,21 +145,24 @@ header{
     text-align: center;
     justify-content: center;
 }
-.info-card .divider{
+
+.info-card .divider {
     width: 0.5px;
     height: 90%;
     background-color: black;
 }
+
 .info-1-container,
 .info-2-container,
-.info-3-container{
+.info-3-container {
     flex: 1;
 }
-.info-card{
+
+.info-card {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     height: 80vh;
@@ -148,7 +170,8 @@ header{
     background-color: #eeecec;
     background-image: url("data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'> <rect width='6' height='6' fill='%23e1e0e0'/> <path d='M0 6 L6 0' stroke='%23eeecec' stroke-width='1'/> </svg>");
 }
-hr{
+
+hr {
     margin-top: 50px;
     margin-left: 10vh;
     margin-right: 10vh;
@@ -158,114 +181,134 @@ hr{
 
 
 
-.line-spacing{
+.line-spacing {
     border-top-style: solid;
     border-top-width: 1px;
     border-color: #3d3a39;
 }
-.phrase{
-    padding: 10vh 0vh 0vh 20vh;
+
+.phrase {
+    padding: clamp(40px, 8vw, 90px) 0;
     font-size: 50px;
-    color:white;
-    
+    color: white;
+
     font-family: 'Geist', system-ui, sans-serif;
 }
-.phrase-1{
-    font-size: 48px;
+
+.phrase-1 {
+    font-size: clamp(24px, 5vw, 48px);
     font-weight: 300;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
-.phrase-2{
-    font-size: 90px;
+
+.phrase-2 {
+    font-size: clamp(44px, 12vw, 90px);
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: clamp(0.04em, 1vw, 0.15em);
     line-height: 1;
-    
+
     /* tech glow */
     text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
-.paragprah-1{
+
+.paragprah-1 {
     margin-top: 30px;
     font-size: 15px;
     color: rgb(140, 137, 137);
     font-family: "Geist Mono", "Geist Mono Fallback";
 }
-.paragprah-1 p{
+
+.paragprah-1 p {
     padding: 10px;
-}   
-.record-symbol{
-    color:red;
+}
+
+.record-symbol {
+    color: red;
     display: inline-block;
     vertical-align: middle;
 }
-.green-dot{
+
+.green-dot {
     border-radius: 50%;
     width: 10px;
     height: 10px;
     background-color: #00a67e;
     display: inline-block;
 }
-.opening_card{
+
+.opening_card {
     display: flex;
-    justify-content: baseline;
-    gap:15vh;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(32px, 8vw, 120px);
+    padding: 0 clamp(20px, 6vw, 120px);
+    margin-bottom: 15.5vh;
 }
-.opening-card-info{
-    margin:10vh 0vh 5vh 0vh;
+
+.opening-card-info {
+    margin: 10vh 0vh 5vh 0vh;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:10px;
+    gap: 10px;
 }
 
-.description{
-    justify-content: flex-end;
+.description {
     width: 100%;
+    max-width: 100%;
     line-height: 1.7;
-    font-family: "Geist Mono", "Geist Mono Fallback";
-    border-radius: 30px;
-    display: flex;
-    position: relative;
-    padding: 0% 5% 0% 55%;
+    overflow: hidden;
 }
-.description-background{
-    background: repeating-linear-gradient(
-        45deg,
-        #0d0f10,            
-        #0d0f10 10px,       
-        #1a1d1f 10px,       
-        #1a1d1f 20px        
-        );
-        width: 150%;
-        overflow-x: hidden;
-        height: 100%;
-        padding: 20px 0;
-        z-index: -1;
-        transform:  scaleX(1.5);
-        position: absolute;
-        
+.description-header {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 100px;
+    letter-spacing: 0.08em;
+    font-family: "Geist", "Geist Fallback";
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+    color: white;
+}
+.description-content {
+    font-family: "Geist Mono", "Geist Mono Fallback";
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+    text-wrap: wrap;
+}
+
+.video-1 {
+    display: block;
+    width: min(100%, 500px);
+    height: auto;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+@media(max-width: 900px) {
+    .opening_card {
+        flex-direction: column;
+        gap: 32px;
+        align-items: center;
+        justify-content: center;
     }
-    .description-content{
-        position: relative;
-        
-        z-index: 1;
-        text-align: right;
-        padding: 40px 60px 40px 0;
-        max-width: 600px;
+
+    .pharese {
+        padding-bottom: 0;
     }
-    .video-1{
-        margin:0vh 0vh 0vh 0vh;
-        border: 1px solid grey;
-        width: 500px;
-        height: 320px;
-        text-align: center;
-        align-content: center;
-        justify-items: center;
-        
+
+    .opening-card-info {
+        margin: 0;
+        padding: 0px 20px 40px;
     }
-    
-    
-    
+
+    .video-1 {
+        width: min(100%, 500px);
+    }
+}

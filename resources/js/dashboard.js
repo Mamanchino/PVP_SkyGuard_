@@ -41,8 +41,10 @@ function proccesNotifications(data){
     if (data.severity === 'critical' || data.severity === 'error'){
         if(!currentErrors.includes(data.id)){
             console.log("SSE ERROR received", data.event_type);
+            document.querySelector(".empty-alert-item")?.remove();
             addAlertNotification(data);
             currentErrors.push(data.id);
+            showalertindicator();
         }
     }
 
@@ -74,6 +76,16 @@ function addNotification(event) {
 }
 
 function addAlertNotification(data){
+    const alertButton = document.querySelector(".alert-notif");
+
+    const ids = alertButton.dataset.alertIds
+        ? alertButton.dataset.alertIds.split(",").filter(Boolean)
+        : [];
+
+    if (!ids.includes(String(data.id))) {
+        ids.push(String(data.id));
+        alertButton.dataset.alertIds = ids.join(",");
+    }
     if(!errorPane) return;
     
     const errorItem = document.createElement('div');
@@ -92,7 +104,7 @@ function showalertindicator() {
     const alertindicator = document.getElementById('alert-indicator');
 
     if (alertindicator) {
-        alertindicator.style.backgroundcolor = 'red';
+        alertindicator.style.backgroundColor = 'red';
         alertindicator.style.opacity = '1';
     }
 }

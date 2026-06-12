@@ -4,7 +4,6 @@ import time
 import requests
 
 ONLINE_THRESHOLD = 5  # seconds
-
 class TelemetryListener:
     def __init__ (self, drone_name, connection_string):
         self.drone_name = drone_name
@@ -18,6 +17,23 @@ class TelemetryListener:
         self.thread=threading.Thread(target=self._loop, daemon=True)
         self.thread.start()
     
+    def handle_battery_level(self, level):
+        if level == -1:
+            return
+        self.battery_level = level
+        
+        if level < 60 and not self.low_battery_sent:
+            threading.Thread(
+                target=self.send_event,
+                args=(self.drone_name, "Low battery level"),
+                daemon=True,
+                kwargs={"severity": "critical"}
+            ).start()
+            self.low_battery_sent = True
+            print("LOW BATTERY CONDITION MET", time.time(), level, flush=True)
+        elif level >= 60:
+            self.low_battery_sent = False
+
     def _loop(self):
         master=mavutil.mavlink_connection(self.connection_string)
         while self.running:
@@ -38,18 +54,11 @@ class TelemetryListener:
                         self.last_connection_time=time.time()
                      
                 if msg_type == "BATTERY_STATUS":
-                    level=msg.battery_remaining
-                    if level != -1:
-                        self.battery_level = level
-                        if level < 60 and not self.low_battery_sent:
-                            self.send_event(self.drone_name, "Low battery level", severity="critical")
-                            self.low_battery_sent = True
-                        elif level >= 60:
-                            self.low_battery_sent = False 
+                    #print("BATTERY MSG", time.time(), msg_type, msg.battery_remaining, flush=True)
+                    self.handle_battery_level(msg.battery_remaining)
                 elif msg_type == "SYS_STATUS":
-                    level=msg.battery_remaining
-                    if level != -1:
-                        self.battery_level = level
+                    #print("BATTERY MSG", time.time(), msg_type, msg.battery_remaining, flush=True)
+                    self.handle_battery_level(msg.battery_remaining)
             self.connection_status = (self.last_connection_time is not None and time.time() - self.last_connection_time < ONLINE_THRESHOLD)
             if not self.connection_status and not self.connection_status_sent:
                 self.send_event(self.drone_name, "Connection was lost with the drone", severity='error')
@@ -64,6 +73,7 @@ class TelemetryListener:
             #     print("SYS_STATUS battery_remaining:", msg.battery_remaining)
 
 
+    
     def get_battery(self):
         return self.battery_level
     def get_connection_status(self):

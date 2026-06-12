@@ -10,9 +10,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Geist+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/footer.css', 'resources/js/blink.js'])
+            @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/footer.css', 'resources/js/blink.js', 'resources/js/video.js'])
         @else
             <style>
             </style>
@@ -20,7 +21,6 @@
     </head>
     <body>
         <x-navbar />
-        <hr class="line-spacing"></hr>
         <div class="opening_card">
         
             <div class="phrase">
@@ -40,18 +40,20 @@
             </div>
             <div class="opening-card-info">
                 <div>
-                    <div class="video-1">
-                        PLACE for video
+                    <div>
+                        <video id="product-video" muted playsinline loop  class="video-1">
+                            <source src="{{ "/videos/drone_showcase.mp4" }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
         </div>
         <div class="description">
-            <div class="description-background"> </div>
-            <div class="desctiption-content">
+            <div class="description-header"> The Next Frontier of Property Defense</div>
+            <div class="description-content">
                 <p>Monitor your property in real-time with a fully autonomous drone — no cameras, no blind spots, no limits.</p>
-                <br>
-                <p class="descpiton-2">SkyGuard patrols, detects threats, and alerts you instantly.</p>
+                <p class="description-2">SkyGuard patrols, detects threats, and alerts you instantly.</p>
             </div>
         </div>
         <hr>
