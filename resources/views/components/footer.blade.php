@@ -1,7 +1,7 @@
     <footer>
         <div class="footer-container">
-            <div>
-                <img src="{{ Vite::asset('resources/images/logo.png') }}" class="h-10">
+            <div class="footer-brand">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" class="footer-logo h-10">
             </div>
             <div class="footer-row">
                 <div class="footer-column">

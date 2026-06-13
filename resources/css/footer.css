@@ -4,7 +4,7 @@ footer{
     
     line-height: 1.5;
     background-color: #24262b;
-    padding: 70px 0;
+    padding: 70px 24px;
     bottom: 0;
     left: 0;           /* būtina */
     width: 100%;       /* užpildo visą ekrano plotį */
@@ -21,10 +21,21 @@ footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 48px;
+}
+.footer-brand{
+    flex: 0 0 auto;
+}
+.footer-logo{
+    display: block;
+    width: clamp(110px, 16vw, 170px);
+    height: auto;
 }
 .footer-row{
     display: flex;
     gap: 60px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 ul{
     list-style: none;
@@ -85,17 +96,68 @@ ul{
 	background-color: #ffffff;
 }
 
+@media(max-width: 900px){
+    footer{
+        padding: 48px 22px;
+    }
+
+    .footer-container{
+        flex-direction: column;
+        align-items: center;
+        gap: 34px;
+        text-align: center;
+    }
+
+    .footer-row{
+        width: 100%;
+        justify-content: center;
+        gap: 34px;
+    }
+
+    .footer-column{
+        width: auto;
+        min-width: 150px;
+        padding: 0;
+    }
+
+    .footer-column h4{
+        margin-bottom: 24px;
+    }
+
+    .footer-column h4::before{
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-column ul li a:hover{
+        padding-left: 0;
+    }
+}
+
 @media(max-width: 767px){
     .footer-column{
-        width: 50%;
+        width: 45%;
         margin-bottom: 30px;
     }
 }
-.footer-row{
-    flex-wrap: wrap;
-}
+
 @media(max-width: 574px){
+    footer{
+        padding: 40px 18px;
+    }
+
+    .footer-row{
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+
     .footer-column{
         width: 100%;
+        margin-bottom: 0;
+    }
+
+    .footer-column h4{
+        font-size: 16px;
     }
 }

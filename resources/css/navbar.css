@@ -20,8 +20,8 @@ header::before {
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(64px);
     -webkit-backdrop-filter: blur(64px);
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
     z-index: -1;
     /* Pushes the visual blur layer strictly behind text link click-zones */
     pointer-events: none;
@@ -31,7 +31,7 @@ header::before {
 .navbar {
     max-width: auto;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 10px 20px;
 }
 
 .navbar .link {
@@ -47,12 +47,58 @@ header::before {
 
 .navbar.navbar-light .link {
     transition: border-color 0.3s ease;
-    border-color: black;
+    border-color: rgb(255, 255, 255);
 }
 
 .navbar.navbar-light .link button {
     transition: color 0.3s ease;
-    color: black;
+    color: rgb(255, 255, 255);
+}
+
+.link {
+    border: 1px solid;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    padding: 0;
+}
+
+.link span {
+    position: relative;
+    z-index: 2;
+}
+
+.link button,
+.link a {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+.link::after {
+    content: "";
+    position: absolute;
+    height: 155px;
+    width: 50px;
+    background: #fff;
+    opacity: 0.2;
+    top: -50px;
+    left: -75px;
+    transform: rotate(35deg);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 1;
+}
+
+.link:hover::after {
+    left: 120%;
+}
+
+.menu-toggle-routes {
+    display: none;
+}
+
+.underline {
+    display: none;
 }
 
 .navbar-container {
@@ -78,9 +124,10 @@ header::before {
         width: 12vw;
         height: auto;
     }
-
+    
     .logo-icon {
         display: none;
+        
 
     }
 
@@ -185,6 +232,10 @@ header::before {
         cursor: pointer;
     }
 
+    .divider {
+        display: none;
+    }
+
     button.alert-notif {
         position: relative;
         display: flex;
@@ -214,9 +265,7 @@ header::before {
     @media (max-width: 900px) {
         .navbar-container {
             margin-left: 4vw;
-            /* Changed from 10vh */
             margin-right: 4vw;
-            /* Changed from 10vh */
         }
 
         .navbar-actions {
@@ -226,37 +275,97 @@ header::before {
         .menu-toggle {
             display: flex;
             position: relative;
-            /* NEW: Gives the button an explicit layer context */
-            z-index: 20;
-            /* NEW: Ensures it's explicitly clickable */
+            z-index: 1000;
         }
 
         .logo-icon {
             display: block;
             height: auto;
             width: 10vw;
-        }
-
-        .nav-link-items {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(64px);
-            padding: 20px 0;
-            z-index: 999;
-        }
-
-        .nav-links.active .nav-link-items {
-            display: flex;
+            z-index: 1000;
         }
 
         .logo-icon-default {
             display: none;
         }
-    }
+        
+        .nav-link-items {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0px;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(64px);
+            padding: 50px 0 0;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
 
+        .nav-links.active .nav-link-items {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .nav-link-items li,
+        .menu-toggle-routes li {
+            display: block;
+            margin-left: 0;
+            width: fit-content;
+            margin-bottom: 16px;
+        }
+
+        .nav-link-items .link,
+        .menu-toggle-routes {
+            position: relative;
+            display: inline-block;
+            overflow: visible;
+            border: none;
+            padding: 0;
+        }
+
+        .nav-link-items .link button,
+        .nav-link-items a.link {
+            color: white;
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-link-items .link::after {
+            content: "";
+            position: absolute;
+            top: auto;
+            left: 20px;
+            right: 20px;
+            bottom: 0px;
+            height: 2px;
+            width: 100vw;
+            opacity: 1;
+            background: #ffffff;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 450ms ease-in-out;
+        }
+
+        .nav-link-items .link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .divider {
+            display: block;
+            width: 90%;
+            margin: 16px auto;
+            border-top: 1px solid rgba(13, 92, 31, 0.513);
+        }
+
+    }
 }

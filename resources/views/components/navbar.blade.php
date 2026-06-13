@@ -5,6 +5,10 @@
     @endphp
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/js/navbar_background.js', 'resources/js/menu_toggle.js'])
+    @else
+    <style>
+        
+    </style>
     @endif
     @if (Route::has('login'))
 
@@ -89,15 +93,25 @@
                                 <button type="submit" class="">Log in</button>
                             </form>
                         </li>
-                        <li> 
+
+                        <li>
                             <form method="GET" action="{{ route('signup') }}" class="link">
                                 @csrf
                                 <button type="submit" class="">Sign up</button>
                             </form>
-                            
+
                         </li>
+                        <hr class="divider">
+                        <div class="menu-toggle-routes">
+                            <li> <a class="link" href="{{ route('about-us') }}">About Us</a></li>
+                            <li> <a class="link" href="{{ route('our-services') }}">Our Services</a></li>
+                            <li><a class="link" href="{{ route('faq') }}">FAQ</a></li>
+                            <li><a class="link" href="{{ route('industrial') }}">Industrial</a></li>
+                            <li><a class="link" href="{{ route('commercial') }}">Commercial</a></li>
+                        </div>
+
                     </div>
-                    <button class="menu-toggle" onclick="toggle()">
+                    <button class="menu-toggle" type="button" aria-label="Open navigation menu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20">
                             <path fill="#fff" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                         </svg>
