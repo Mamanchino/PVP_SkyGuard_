@@ -208,5 +208,10 @@ class DroneController
         //     'X-Accel-Buffering' => 'no',
         // ]);
     }
+
+    public function findByStreamUrl(Request $request)
+    {
+       $drone = \App\Models\Drone::where('stream_url', $request->query('url'))->firstOrFail();
+       return response()->json(['drone_id' => $drone->id]);
+    }
 }
-?>

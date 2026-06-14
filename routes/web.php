@@ -13,6 +13,7 @@ use App\Models\Drone;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use PHPUnit\Event\EventCollection;
+use App\Http\Controllers\NotificationController;
 
 
 Route::get('/', function () {
@@ -46,6 +47,7 @@ Route::get('/profile', function () {
 })->middleware('auth')->name('profile');
 
 #Add a drone to the user's account
+Route::get('/drones/by-stream-url', [DroneController::class, 'findByStreamUrl']);
 Route::post('/drones/add', [DroneController::class, 'add']);
 Route::get('/add-drone', [DroneController::class, 'get_devices'])->middleware('auth')->name('add-drone');
 
@@ -83,3 +85,12 @@ Route::get('/our_services', function (Request $request) {return view('our-servic
 Route::get('/faq', function (Request $request) {return view('faq');})->name('faq');
 Route::get('/industrial', function (Request $request) {return view('industrial');})->name('industrial');
 Route::get('/commercial', function (Request $request) {return view('commercial');})->name('commercial');
+
+# Notification routes
+Route::post('/detections', [NotificationController::class, 'store']);
+Route::get('/drones/by-stream-url', [DroneController::class, 'findByStreamUrl']); // add here
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::post('/notifications/mark-read', [NotificationController::class, 'markRead']);
+});
+
